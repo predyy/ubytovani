@@ -4,6 +4,8 @@ export type HeroProps = {
   backgroundStyle: "solid" | "gradient";
   primaryButtonLabel?: string;
   primaryButtonHref?: string;
+  imageUrl?: string;
+  imageAlt?: string;
 };
 
 export type RichTextProps = {

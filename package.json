@@ -12,14 +12,18 @@
     "prisma:generate": "prisma generate"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.888.0",
+    "@aws-sdk/s3-presigned-post": "^3.888.0",
     "@measured/puck": "^0.20.2",
     "@prisma/client": "^6.16.0",
     "argon2": "^0.43.0",
     "jose": "^6.1.0",
     "lucide-react": "^0.544.0",
+    "marked": "^15.0.7",
     "next": "16.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sanitize-html": "^2.16.0",
     "zod": "^4.1.5"
   },
   "devDependencies": {
@@ -27,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/sanitize-html": "^2.16.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "prisma": "^6.16.0",

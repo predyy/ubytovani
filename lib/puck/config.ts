@@ -22,6 +22,8 @@ export const puckConfig: Config = {
         },
         primaryButtonLabel: { type: "text" },
         primaryButtonHref: { type: "text" },
+        imageUrl: { type: "text" },
+        imageAlt: { type: "text" },
       },
       defaultProps: {
         title: "A modern stay, tailored for your guests",
@@ -30,6 +32,9 @@ export const puckConfig: Config = {
         backgroundStyle: "gradient",
         primaryButtonLabel: "Request availability",
         primaryButtonHref: "#booking",
+        imageUrl:
+          "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
+        imageAlt: "Cozy guest room with natural light",
       },
       render: HeroBlock,
     },

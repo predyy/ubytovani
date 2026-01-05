@@ -10,7 +10,6 @@ import { publishSiteAction, saveDraftAction } from "@/lib/puck/actions";
 
 type SiteBuilderClientProps = {
   tenantId: string;
-  tenantName: string;
   lang: string;
   publicUrl: string;
   initialData: PuckDataShape;
@@ -21,7 +20,6 @@ type SiteBuilderClientProps = {
 
 export default function SiteBuilderClient({
   tenantId,
-  tenantName,
   lang,
   publicUrl,
   initialData,
@@ -148,13 +146,13 @@ export default function SiteBuilderClient({
   return (
     <div className="min-h-screen bg-white">
       <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/95 backdrop-blur">
-        <div className="container mx-auto flex flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between">
+        <div className="container mx-auto flex flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
               Site Builder
             </p>
             <h1 className="mt-2 text-2xl font-semibold text-slate-900">
-              {tenantName}
+              Manage site content
             </h1>
             <p className="mt-1 text-sm text-slate-500">
               Locale: {lang.toUpperCase()}
@@ -204,14 +202,14 @@ export default function SiteBuilderClient({
                 : "border-t border-emerald-200 bg-emerald-50 text-emerald-700"
             }
           >
-            <div className="container mx-auto px-4 py-2 text-xs">
+            <div className="container mx-auto px-6 py-2 text-xs">
               {status.message}
             </div>
           </div>
         ) : null}
         {!canPublish ? (
           <div className="border-t border-amber-200 bg-amber-50">
-            <div className="container mx-auto px-4 py-2 text-xs text-amber-700">
+            <div className="container mx-auto px-6 py-2 text-xs text-amber-700">
               You have read-only publishing permissions. Ask an admin to publish changes.
             </div>
           </div>

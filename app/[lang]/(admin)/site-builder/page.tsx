@@ -77,7 +77,6 @@ export default async function SiteBuilderPage({
   return (
     <SiteBuilderClient
       tenantId={tenant.id}
-      tenantName={tenant.name}
       lang={tenant.defaultLocale}
       publicUrl={publicUrl}
       initialData={initialData}

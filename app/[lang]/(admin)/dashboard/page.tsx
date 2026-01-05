@@ -62,15 +62,15 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   const publicUrl = `${protocol}://${membership.tenant.slug}.${rootDomain}/${membership.tenant.defaultLocale}`;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
-      <div className="container mx-auto px-4 py-16">
+    <main className="min-h-screen bg-transparent">
+      <div className="container mx-auto px-6 py-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
               Admin dashboard
             </p>
             <h1 className="mt-4 text-3xl font-semibold text-slate-900">
-              Welcome, {membership.tenant.name}
+              Dashboard
             </h1>
             <p className="mt-2 text-slate-600">
               Manage bookings, availability, and your site content.
@@ -95,7 +95,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
           <div className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3">
               <IconBadge>
@@ -155,12 +155,22 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
               label: "Site Builder",
               href: `/${lang}/site-builder`,
               icon: <LayoutIcon />,
+            },
+            {
+              label: "Assets",
+              href: `/${lang}/assets`,
+              icon: <ImageIcon />,
+            },
+            {
+              label: "Docs",
+              href: `/${lang}/docs`,
+              icon: <DocIcon />,
             },
             {
               label: "Availability",
@@ -255,6 +265,26 @@ function CalendarIcon() {
       <rect x="3" y="4" width="18" height="18" rx="2" />
       <path d="M16 2v4M8 2v4M3 10h18" />
       <path d="M8 14h2M12 14h2M16 14h2M8 18h2M12 18h2" />
+    </svg>
+  );
+}
+
+function ImageIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <circle cx="8.5" cy="9" r="1.5" />
+      <path d="M21 17l-5-5-4 4-2-2-4 4" />
+    </svg>
+  );
+}
+
+function DocIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M9 13h6M9 17h6" />
     </svg>
   );
 }

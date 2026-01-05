@@ -11,6 +11,9 @@ export const starterPuckData: PuckDataShape = {
         backgroundStyle: "gradient",
         primaryButtonLabel: "Request availability",
         primaryButtonHref: "#booking",
+        imageUrl:
+          "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
+        imageAlt: "Suite with neutral tones and daylight",
       },
     },
     {

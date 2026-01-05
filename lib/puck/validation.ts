@@ -16,6 +16,8 @@ const heroSchema = z
         backgroundStyle: z.enum(["solid", "gradient"]),
         primaryButtonLabel: z.string().optional(),
         primaryButtonHref: z.string().optional(),
+        imageUrl: z.string().optional(),
+        imageAlt: z.string().optional(),
       })
       .strip(),
   })

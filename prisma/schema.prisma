@@ -21,6 +21,8 @@ model Tenant {
   properties     Property[]
   siteConfigs    SitePageConfig[]
   emailTemplates EmailTemplate[]
+  assets         Asset[]
+  staticDocs     StaticDoc[]
 }
 
 model User {
@@ -32,6 +34,8 @@ model User {
 
   refreshTokens RefreshToken[]
   memberships   TenantMember[]
+  assets        Asset[]
+  staticDocs    StaticDoc[]
 }
 
 model RefreshToken {
@@ -107,6 +111,46 @@ model EmailTemplate {
   tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@unique([tenantId, type, locale])
+  @@index([tenantId])
+}
+
+model Asset {
+  id              String   @id @default(cuid())
+  tenantId        String
+  key             String
+  url             String
+  mimeType        String
+  sizeBytes       Int
+  originalName    String
+  createdByUserId String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tenant    Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdBy User   @relation(fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([createdByUserId])
+}
+
+model StaticDoc {
+  id              String   @id @default(cuid())
+  tenantId        String
+  locale          String
+  slug            String
+  title           String
+  s3Key           String
+  mimeType        String
+  sizeBytes       Int
+  originalName    String
+  createdByUserId String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tenant    Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdBy User   @relation(fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, locale, slug])
   @@index([tenantId])
 }
 
