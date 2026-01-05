@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  plan           TenantPlan @default(FREE)
+  defaultLocale  String
+  enabledLocales String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  members        TenantMember[]
+  properties     Property[]
+  siteConfigs    SitePageConfig[]
+  emailTemplates EmailTemplate[]
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  passwordHash String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  refreshTokens RefreshToken[]
+  memberships   TenantMember[]
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model TenantMember {
+  id        String     @id @default(cuid())
+  tenantId  String
+  userId    String
+  role      TenantRole @default(OWNER)
+  createdAt DateTime   @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, userId])
+  @@index([userId])
+}
+
+model Property {
+  id           String   @id @default(cuid())
+  tenantId     String
+  propertyType String
+  roomCount    Int
+  maxGuests    Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+}
+
+model SitePageConfig {
+  id        String           @id @default(cuid())
+  tenantId  String
+  locale    String
+  status    SiteConfigStatus
+  puckJson  Json
+  publishedAt DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, locale, status])
+  @@index([tenantId])
+}
+
+model EmailTemplate {
+  id        String            @id @default(cuid())
+  tenantId  String?
+  type      EmailTemplateType
+  locale    String
+  subject   String
+  htmlBody  String
+  enabled   Boolean           @default(true)
+  fromName  String?
+  replyTo   String?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, type, locale])
+  @@index([tenantId])
+}
+
+enum TenantPlan {
+  FREE
+  PAID
+}
+
+enum TenantRole {
+  OWNER
+  ADMIN
+  STAFF
+}
+
+enum SiteConfigStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum EmailTemplateType {
+  BOOKING_REQUEST_GUEST
+  BOOKING_REQUEST_HOST
+  BOOKING_CONFIRMED_GUEST
+  BOOKING_CONFIRMED_HOST
+  BOOKING_CANCELLED_GUEST
+  BOOKING_CANCELLED_HOST
+}
