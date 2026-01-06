@@ -3,6 +3,8 @@ import { Check, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { supportedLocales } from "@/lib/i18n/locales";
+import { getMessages } from "@/lib/i18n/messages";
 
 type PricingPageProps = {
   params: Promise<{
@@ -16,6 +18,9 @@ export default async function PricingPage({ params }: PricingPageProps) {
   const adminSubdomain = process.env.ADMIN_SUBDOMAIN ?? "app";
   const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
   const appUrl = `${protocol}://${adminSubdomain}.${rootDomain}/${lang}/login`;
+  const messages = getMessages(lang);
+  const copy = messages.marketing.pricingPage;
+  const { brand, languageLabel } = messages.common;
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_transparent_55%)]">
@@ -25,15 +30,20 @@ export default async function PricingPage({ params }: PricingPageProps) {
             href={`/${lang}`}
             className="text-sm font-semibold text-slate-900"
           >
-            StayHost
+            {brand}
           </Link>
           <div className="flex items-center gap-3">
+            <LanguageSwitcher
+              label={languageLabel}
+              currentLang={lang}
+              hrefForLocale={(locale) => `/${locale}/pricing`}
+            />
             <Button asChild variant="outline">
-              <a href={appUrl}>Login</a>
+              <a href={appUrl}>{copy.login}</a>
             </Button>
             <Button asChild>
               <a href={appUrl}>
-                Start free
+                {copy.startFree}
                 <ChevronRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
@@ -44,49 +54,59 @@ export default async function PricingPage({ params }: PricingPageProps) {
       <main className="container mx-auto px-4 py-16">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-semibold text-slate-900 md:text-5xl">
-            Pricing built for hosts
+            {copy.title}
           </h1>
           <p className="mt-4 text-lg text-slate-600">
-            Start with the essentials, unlock advanced features when you are
-            ready.
+            {copy.description}
           </p>
         </div>
 
         <div className="mt-12 grid gap-8 md:grid-cols-3">
-          <PricingCard
-            name="Starter"
-            price="Free"
-            features={[
-              "Tenant subdomain",
-              "Single language",
-              "Booking requests",
-              "Availability calendar",
-            ]}
-          />
-          <PricingCard
-            name="Professional"
-            price="$19/mo"
-            featured
-            features={[
-              "Custom domain",
-              "Multi-language",
-              "Premium templates",
-              "Airbnb sync",
-              "Priority support",
-            ]}
-          />
-          <PricingCard
-            name="Enterprise"
-            price="$49/mo"
-            features={[
-              "White-label",
-              "API access",
-              "Dedicated onboarding",
-              "Custom integrations",
-            ]}
-          />
+          {copy.tiers.map((tier) => (
+            <PricingCard
+              key={tier.name}
+              name={tier.name}
+              price={tier.price}
+              featured={tier.featured}
+              features={tier.features}
+              featuredLabel={copy.featuredLabel}
+            />
+          ))}
         </div>
       </main>
+    </div>
+  );
+}
+
+function LanguageSwitcher({
+  label,
+  currentLang,
+  hrefForLocale,
+}: {
+  label: string;
+  currentLang: string;
+  hrefForLocale: (locale: string) => string;
+}) {
+  return (
+    <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-white/70 px-1.5 py-1 text-xs font-semibold text-slate-600">
+      <span className="sr-only">{label}</span>
+      {supportedLocales.map((locale) => {
+        const isActive = locale === currentLang;
+        return (
+          <a
+            key={locale}
+            href={hrefForLocale(locale)}
+            className={
+              isActive
+                ? "rounded-full bg-blue-600 px-2 py-1 text-white"
+                : "rounded-full px-2 py-1 text-slate-600 hover:text-slate-900"
+            }
+            aria-current={isActive ? "page" : undefined}
+          >
+            {locale.toUpperCase()}
+          </a>
+        );
+      })}
     </div>
   );
 }
@@ -96,11 +116,13 @@ function PricingCard({
   price,
   features,
   featured,
+  featuredLabel,
 }: {
   name: string;
   price: string;
   features: string[];
   featured?: boolean;
+  featuredLabel: string;
 }) {
   return (
     <Card
@@ -113,7 +135,7 @@ function PricingCard({
       <CardContent>
         {featured ? (
           <span className="inline-flex rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
-            Most popular
+            {featuredLabel}
           </span>
         ) : null}
         <h2 className="mt-4 text-2xl font-semibold text-slate-900">{name}</h2>

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import AdminNav from "@/components/admin/AdminNav";
 import { getCurrentUser } from "@/lib/auth/session";
 import { ACTIVE_TENANT_COOKIE } from "@/lib/auth/constants";
+import { getMessages } from "@/lib/i18n/messages";
 import { prisma } from "@/lib/prisma";
 
 type AdminLayoutProps = {
@@ -19,6 +20,8 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
   const { lang } = await params;
   const headerList = await headers();
   const mode = headerList.get("x-tenant-mode") ?? "marketing";
+  const messages = getMessages(lang);
+  const copy = messages.admin.layout;
 
   if (mode !== "admin") {
     redirect(`/${lang}`);
@@ -54,14 +57,14 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
   const publicUrl = `${protocol}://${membership.tenant.slug}.${rootDomain}/${membership.tenant.defaultLocale}`;
 
   const navItems = [
-    { label: "Dashboard", href: `/${lang}/dashboard`, icon: DashboardIcon },
-    { label: "Site Builder", href: `/${lang}/site-builder`, icon: LayoutIcon },
-    { label: "Assets", href: `/${lang}/assets`, icon: ImageIcon },
-    { label: "Docs", href: `/${lang}/docs`, icon: DocIcon },
-    { label: "Rooms", href: `/${lang}/rooms`, icon: RoomsIcon },
-    { label: "Availability", href: `/${lang}/availability`, icon: CalendarIcon },
-    { label: "Bookings", href: `/${lang}/bookings`, icon: TicketsIcon },
-    { label: "Emails", href: "#", icon: MailIcon },
+    { label: copy.navItems.dashboard, href: `/${lang}/dashboard`, icon: DashboardIcon },
+    { label: copy.navItems.siteBuilder, href: `/${lang}/site-builder`, icon: LayoutIcon },
+    { label: copy.navItems.assets, href: `/${lang}/assets`, icon: ImageIcon },
+    { label: copy.navItems.docs, href: `/${lang}/docs`, icon: DocIcon },
+    { label: copy.navItems.rooms, href: `/${lang}/rooms`, icon: RoomsIcon },
+    { label: copy.navItems.availability, href: `/${lang}/availability`, icon: CalendarIcon },
+    { label: copy.navItems.bookings, href: `/${lang}/bookings`, icon: TicketsIcon },
+    { label: copy.navItems.emails, href: `/${lang}/emails`, icon: MailIcon },
   ];
 
   return (
@@ -79,7 +82,7 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
         <div className="border-b border-slate-200/70 bg-white lg:hidden">
           <details className="group">
             <summary className="flex cursor-pointer items-center justify-between px-4 py-4 text-sm font-semibold text-slate-700">
-              <span>Admin menu</span>
+              <span>{copy.adminMenu}</span>
               <span className="text-xs text-slate-400 group-open:rotate-180 transition">▾</span>
             </summary>
             <div className="border-t border-slate-200/70 px-4 py-4">

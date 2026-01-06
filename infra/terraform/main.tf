@@ -43,3 +43,11 @@ module "s3" {
   env        = var.env
   aws_region = var.aws_region
 }
+
+module "ses" {
+  source     = "./modules/ses"
+  env        = var.env
+  aws_region = var.aws_region
+  from_email = var.ses_from_email
+  domain     = var.ses_domain
+}

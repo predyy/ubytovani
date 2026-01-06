@@ -1,4 +1,4 @@
-const rawLocales = (process.env.SUPPORTED_LOCALES ?? "en")
+const rawLocales = (process.env.SUPPORTED_LOCALES ?? "en,cs")
   .split(",")
   .map((locale) => locale.trim())
   .filter(Boolean);

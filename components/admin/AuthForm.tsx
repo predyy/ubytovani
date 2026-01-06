@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import type { AuthActionState } from "@/lib/auth/actions";
+import { formatMessage, getMessages } from "@/lib/i18n/messages";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -19,13 +20,16 @@ const initialState: AuthActionState = {};
 
 export default function AuthForm({ mode, lang, action }: AuthFormProps) {
   const [state, formAction] = useFormState(action, initialState);
+  const messages = getMessages(lang);
+  const copy = messages.admin.authForm;
+  const brand = messages.common.brand;
 
   return (
     <form action={formAction} className="space-y-6">
       <input type="hidden" name="lang" value={lang} />
       <div className="space-y-2">
         <label className="text-sm font-medium text-slate-700" htmlFor="email">
-          Email
+          {copy.email}
         </label>
         <input
           id="email"
@@ -41,7 +45,7 @@ export default function AuthForm({ mode, lang, action }: AuthFormProps) {
           className="text-sm font-medium text-slate-700"
           htmlFor="password"
         >
-          Password
+          {copy.password}
         </label>
         <input
           id="password"
@@ -58,26 +62,29 @@ export default function AuthForm({ mode, lang, action }: AuthFormProps) {
           {state.error}
         </div>
       ) : null}
-      <SubmitButton label={mode === "signup" ? "Create account" : "Sign in"} />
+      <SubmitButton
+        label={mode === "signup" ? copy.createAccount : copy.signIn}
+        workingLabel={copy.working}
+      />
       <div className="text-center text-sm text-slate-600">
         {mode === "signup" ? (
           <>
-            Already have an account?{" "}
+            {copy.alreadyHaveAccount}{" "}
             <Link
               href={`/${lang}/login`}
               className="font-semibold text-blue-600 hover:text-blue-700"
             >
-              Sign in
+              {copy.signIn}
             </Link>
           </>
         ) : (
           <>
-            New to StayHost?{" "}
+            {formatMessage(copy.newTo, { brand })}{" "}
             <Link
               href={`/${lang}/signup`}
               className="font-semibold text-blue-600 hover:text-blue-700"
             >
-              Create an account
+              {copy.createAccount}
             </Link>
           </>
         )}
@@ -86,7 +93,7 @@ export default function AuthForm({ mode, lang, action }: AuthFormProps) {
   );
 }
 
-function SubmitButton({ label }: { label: string }) {
+function SubmitButton({ label, workingLabel }: { label: string; workingLabel: string }) {
   const { pending } = useFormStatus();
 
   return (
@@ -96,7 +103,7 @@ function SubmitButton({ label }: { label: string }) {
       className="w-full"
       disabled={pending}
     >
-      {pending ? "Working..." : label}
+      {pending ? workingLabel : label}
     </Button>
   );
 }

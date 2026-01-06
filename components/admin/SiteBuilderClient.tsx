@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { puckConfig } from "@/lib/puck/config";
 import type { PuckDataShape } from "@/lib/puck/types";
 import { publishSiteAction, saveDraftAction } from "@/lib/puck/actions";
+import { formatMessage, getMessages } from "@/lib/i18n/messages";
 
 type SiteBuilderClientProps = {
   tenantId: string;
@@ -44,6 +45,7 @@ export default function SiteBuilderClient({
   const saveIndicatorTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isAutosaving = useRef(false);
   const lastSavedSnapshot = useRef<string>(JSON.stringify(initialData));
+  const copy = getMessages(lang).admin.siteBuilder;
 
   const handleChange = (next: PuckDataShape) => {
     setData(next);
@@ -79,7 +81,7 @@ export default function SiteBuilderClient({
       lastSavedSnapshot.current = JSON.stringify(data);
       setHasUnsavedChanges(false);
       setSavedIndicator();
-      setStatus({ type: "success", message: "Draft saved." });
+      setStatus({ type: "success", message: copy.draftSaved });
     });
   };
 
@@ -94,7 +96,7 @@ export default function SiteBuilderClient({
       if (result.publishedAt) {
         setPublishedAt(result.publishedAt);
       }
-      setStatus({ type: "success", message: "Site published." });
+      setStatus({ type: "success", message: copy.sitePublished });
     });
   };
 
@@ -149,19 +151,25 @@ export default function SiteBuilderClient({
         <div className="container mx-auto flex flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-              Site Builder
+              {copy.eyebrow}
             </p>
             <h1 className="mt-2 text-2xl font-semibold text-slate-900">
-              Manage site content
+              {copy.title}
             </h1>
             <p className="mt-1 text-sm text-slate-500">
-              Locale: {lang.toUpperCase()}
+              {copy.locale}: {lang.toUpperCase()}
             </p>
             <div className="mt-2 text-xs text-slate-400">
-              {savedAt ? `Last saved ${formatTimestamp(savedAt)}` : "Not saved yet"}
+              {savedAt
+                ? formatMessage(copy.lastSaved, {
+                    date: formatTimestamp(savedAt),
+                  })
+                : copy.notSaved}
               {publishedAt
-                ? ` - Last published ${formatTimestamp(publishedAt)}`
-                : " - Not published"}
+                ? ` - ${formatMessage(copy.lastPublished, {
+                    date: formatTimestamp(publishedAt),
+                  })}`
+                : ` - ${copy.notPublished}`}
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -169,7 +177,7 @@ export default function SiteBuilderClient({
               href={publicUrl}
               className="inline-flex items-center justify-center rounded-full border border-blue-200 px-4 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50"
             >
-              View live site
+              {copy.viewLive}
             </a>
             <Button
               type="button"
@@ -179,10 +187,10 @@ export default function SiteBuilderClient({
               disabled={isPending}
             >
               {saveIndicator === "saving"
-                ? "Saving..."
+                ? copy.saving
                 : saveIndicator === "saved"
-                  ? "Saved"
-                  : "Save draft"}
+                  ? copy.saved
+                  : copy.saveDraft}
             </Button>
             <Button
               type="button"
@@ -190,7 +198,7 @@ export default function SiteBuilderClient({
               onClick={handlePublish}
               disabled={isPending || !canPublish}
             >
-              Publish
+              {copy.publish}
             </Button>
           </div>
         </div>
@@ -210,7 +218,7 @@ export default function SiteBuilderClient({
         {!canPublish ? (
           <div className="border-t border-amber-200 bg-amber-50">
             <div className="container mx-auto px-6 py-2 text-xs text-amber-700">
-              You have read-only publishing permissions. Ask an admin to publish changes.
+              {copy.readOnly}
             </div>
           </div>
         ) : null}

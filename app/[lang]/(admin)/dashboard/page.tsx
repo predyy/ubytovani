@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { logoutAction } from "@/lib/auth/actions";
 import { requireUser } from "@/lib/auth/session";
 import { ACTIVE_TENANT_COOKIE } from "@/lib/auth/constants";
+import { formatMessage, getMessages } from "@/lib/i18n/messages";
 import { prisma } from "@/lib/prisma";
 
 type DashboardPageProps = {
@@ -19,6 +20,9 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
     lang,
     nextPath: `/${lang}/dashboard`,
   });
+  const messages = getMessages(lang);
+  const copy = messages.admin.dashboard;
+  const navItems = messages.admin.layout.navItems;
 
   const cookieStore = await cookies();
   const activeTenantId = cookieStore.get(ACTIVE_TENANT_COOKIE)?.value ?? null;
@@ -37,16 +41,16 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
       <main className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">
           <h1 className="text-3xl font-semibold text-slate-900">
-            No tenant selected
+            {copy.noTenantTitle}
           </h1>
           <p className="mt-3 text-slate-600">
-            Create your first tenant to access the dashboard.
+            {copy.noTenantDescription}
           </p>
           <Link
             href={`/${lang}/onboarding`}
             className="mt-6 inline-flex items-center rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
-            Start onboarding
+            {copy.startOnboarding}
           </Link>
         </div>
       </main>
@@ -67,13 +71,13 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-              Admin dashboard
+              {copy.headerEyebrow}
             </p>
             <h1 className="mt-4 text-3xl font-semibold text-slate-900">
-              Dashboard
+              {copy.headerTitle}
             </h1>
             <p className="mt-2 text-slate-600">
-              Manage bookings, availability, and your site content.
+              {copy.headerDescription}
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -81,7 +85,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
               href={publicUrl}
               className="inline-flex items-center justify-center rounded-full border border-blue-200 px-5 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-50"
             >
-              View public site
+              {copy.viewPublicSite}
             </a>
             <form action={logoutAction}>
               <input type="hidden" name="lang" value={lang} />
@@ -89,7 +93,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                 type="submit"
                 className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
               >
-                Log out
+                {copy.logout}
               </button>
             </form>
           </div>
@@ -102,14 +106,14 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                 <TenantIcon />
               </IconBadge>
               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Tenant
+                {copy.tenantLabel}
               </p>
             </div>
             <p className="mt-4 text-2xl font-semibold text-slate-900">
               {membership.tenant.slug}
             </p>
             <p className="mt-2 text-sm text-slate-500">
-              Default locale: {membership.tenant.defaultLocale.toUpperCase()}
+              {copy.defaultLocale}: {membership.tenant.defaultLocale.toUpperCase()}
             </p>
           </div>
           <div className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm">
@@ -118,7 +122,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                 <HomeIcon />
               </IconBadge>
               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Property
+                {copy.propertyLabel}
               </p>
             </div>
             {property ? (
@@ -127,15 +131,15 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                   {property.propertyType}
                 </p>
                 <p className="mt-2 text-sm text-slate-500">
-                  Rooms: {property.roomCount}
+                  {copy.roomsLabel}: {property.roomCount}
                   {property.maxGuests
-                    ? ` - Max guests: ${property.maxGuests}`
+                    ? ` - ${copy.maxGuestsLabel}: ${property.maxGuests}`
                     : ""}
                 </p>
               </>
             ) : (
               <p className="mt-4 text-sm text-slate-500">
-                Add property details in onboarding.
+                {copy.addPropertyHint}
               </p>
             )}
           </div>
@@ -145,12 +149,12 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                 <LinkIcon />
               </IconBadge>
               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Public URL
+                {copy.publicUrlLabel}
               </p>
             </div>
             <p className="mt-4 text-sm text-slate-700">{publicUrl}</p>
             <p className="mt-2 text-xs text-slate-400">
-              Share this with guests once you are ready.
+              {copy.shareHint}
             </p>
           </div>
         </div>
@@ -158,38 +162,38 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
-              label: "Site Builder",
+              label: navItems.siteBuilder,
               href: `/${lang}/site-builder`,
               icon: <LayoutIcon />,
             },
             {
-              label: "Assets",
+              label: navItems.assets,
               href: `/${lang}/assets`,
               icon: <ImageIcon />,
             },
             {
-              label: "Docs",
+              label: navItems.docs,
               href: `/${lang}/docs`,
               icon: <DocIcon />,
             },
             {
-              label: "Rooms",
+              label: navItems.rooms,
               href: `/${lang}/rooms`,
               icon: <HomeIcon />,
             },
             {
-              label: "Availability",
+              label: navItems.availability,
               href: `/${lang}/availability`,
               icon: <CalendarIcon />,
             },
             {
-              label: "Bookings",
+              label: navItems.bookings,
               href: `/${lang}/bookings`,
               icon: <TicketsIcon />,
             },
             {
-              label: "Emails",
-              href: "#",
+              label: navItems.emails,
+              href: `/${lang}/emails`,
               icon: <MailIcon />,
             },
           ].map((item) => (
@@ -209,7 +213,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                 </div>
               </div>
               <p className="mt-3 text-xs text-slate-500">
-                Open {item.label.toLowerCase()} workspace
+                {formatMessage(copy.openWorkspace, { label: item.label })}
               </p>
             </Link>
           ))}

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { isValidDateRange, parseDateOnly } from "@/lib/dates";
+import { formatMessage, getMessages } from "@/lib/i18n/messages";
 
 type AvailabilityBlockItem = {
   id: string;
@@ -59,6 +60,7 @@ export default function AvailabilityManager({
   const [status, setStatus] = useState<StatusState>({ type: "idle" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const copy = getMessages(lang).admin.availability;
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -78,12 +80,12 @@ export default function AvailabilityManager({
     const endDate = parseDateOnly(form.endDate);
 
     if (!form.roomId) {
-      setStatus({ type: "error", message: "Please select a room." });
+      setStatus({ type: "error", message: copy.selectRoomError });
       return;
     }
 
     if (!startDate || !endDate || !isValidDateRange(startDate, endDate)) {
-      setStatus({ type: "error", message: "Please select a valid date range." });
+      setStatus({ type: "error", message: copy.invalidRangeError });
       return;
     }
 
@@ -104,7 +106,7 @@ export default function AvailabilityManager({
 
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to create block.");
+        throw new Error(payload.error || copy.createFailure);
       }
 
       const newBlock = payload.block as AvailabilityBlockItem;
@@ -113,11 +115,12 @@ export default function AvailabilityManager({
         ...initialFormState,
         roomId: prev.roomId,
       }));
-      setStatus({ type: "success", message: "Block created." });
+      setStatus({ type: "success", message: copy.createSuccess });
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Failed to create block.",
+        message:
+          error instanceof Error ? error.message : copy.createFailure,
       });
     } finally {
       setIsSubmitting(false);
@@ -138,15 +141,16 @@ export default function AvailabilityManager({
       );
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to delete block.");
+        throw new Error(payload.error || copy.deleteFailure);
       }
 
       setItems((prev) => prev.filter((block) => block.id !== blockId));
-      setStatus({ type: "success", message: "Block deleted." });
+      setStatus({ type: "success", message: copy.deleteSuccess });
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Failed to delete block.",
+        message:
+          error instanceof Error ? error.message : copy.deleteFailure,
       });
     } finally {
       setDeletingId(null);
@@ -158,16 +162,16 @@ export default function AvailabilityManager({
       <div className="border-b border-slate-200/70 bg-white">
         <div className="container mx-auto px-6 py-6">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-            Availability
+            {copy.eyebrow}
           </p>
           <h1 className="mt-3 text-3xl font-semibold text-slate-900">
-            Availability blocks
+            {copy.title}
           </h1>
           <p className="mt-2 text-slate-600">
-            Block dates to prevent new bookings on those nights.
+            {copy.description}
           </p>
           <p className="mt-1 text-xs text-slate-400">
-            Active tenant: {tenantSlug} | Locale: {lang.toUpperCase()}
+            {copy.activeTenant}: {tenantSlug} | {copy.locale}: {lang.toUpperCase()}
           </p>
         </div>
       </div>
@@ -177,16 +181,16 @@ export default function AvailabilityManager({
           <CardContent className="space-y-4">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                Create a manual block
+                {copy.createTitle}
               </h2>
               <p className="mt-1 text-sm text-slate-500">
-                Blocks are date ranges where check-ins are not allowed.
+                {copy.createHint}
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-4">
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="roomId">
-                  Room
+                  {copy.roomLabel}
                 </label>
                 <select
                   id="roomId"
@@ -198,14 +202,14 @@ export default function AvailabilityManager({
                   {rooms.map((room) => (
                     <option key={room.id} value={room.id}>
                       {room.name}
-                      {room.isActive ? "" : " (inactive)"}
+                      {room.isActive ? "" : copy.roomInactive}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="startDate">
-                  Start date
+                  {copy.startDate}
                 </label>
                 <input
                   id="startDate"
@@ -218,7 +222,7 @@ export default function AvailabilityManager({
               </div>
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="endDate">
-                  End date
+                  {copy.endDate}
                 </label>
                 <input
                   id="endDate"
@@ -232,20 +236,20 @@ export default function AvailabilityManager({
               </div>
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="reason">
-                  Reason (optional)
+                  {copy.reasonLabel}
                 </label>
                 <input
                   id="reason"
                   name="reason"
                   value={form.reason}
                   onChange={handleChange}
-                  placeholder="Owner stay"
+                  placeholder={copy.reasonPlaceholder}
                   className="rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700"
                 />
               </div>
             </div>
             <Button type="button" onClick={handleCreate} disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Create block"}
+              {isSubmitting ? copy.saving : copy.createButton}
             </Button>
             {status.type !== "idle" ? (
               <div
@@ -264,13 +268,15 @@ export default function AvailabilityManager({
         <section>
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-slate-900">
-              Upcoming blocks
+              {copy.upcomingTitle}
             </h2>
-            <span className="text-xs text-slate-400">{items.length} total</span>
+            <span className="text-xs text-slate-400">
+              {formatMessage(copy.totalLabel, { count: items.length })}
+            </span>
           </div>
           {items.length === 0 ? (
             <div className="mt-4 rounded-2xl border border-dashed border-slate-200 p-8 text-center text-sm text-slate-500">
-              No availability blocks yet.
+              {copy.emptyState}
             </div>
           ) : (
             <div className="mt-6 grid gap-4">
@@ -287,7 +293,15 @@ export default function AvailabilityManager({
                       </p>
                       <p className="mt-1 text-xs text-slate-500">
                         {block.roomName}
-                        {nights ? ` - ${nights} night${nights === 1 ? "" : "s"}` : ""}
+                        {nights
+                          ? ` - ${nights} ${
+                              nights === 1
+                                ? copy.nights.one
+                                : nights >= 2 && nights <= 4
+                                  ? copy.nights.few
+                                  : copy.nights.many
+                            }`
+                          : ""}
                         {block.reason ? ` - ${block.reason}` : ""}
                       </p>
                     </div>
@@ -297,7 +311,7 @@ export default function AvailabilityManager({
                       onClick={() => handleDelete(block.id)}
                       disabled={deletingId === block.id}
                     >
-                      {deletingId === block.id ? "Deleting..." : "Delete"}
+                      {deletingId === block.id ? copy.deleting : copy.delete}
                     </Button>
                   </div>
                 );

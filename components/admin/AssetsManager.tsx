@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatMessage, getMessages } from "@/lib/i18n/messages";
 
 type AssetItem = {
   id: string;
@@ -35,6 +36,7 @@ export default function AssetsManager({
   });
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const copy = getMessages(lang).admin.assets;
 
   const handleUpload = async () => {
     if (!selectedFile || isUploading) {
@@ -98,11 +100,12 @@ export default function AssetsManager({
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
-      setStatus({ type: "success", message: "Asset uploaded." });
+      setStatus({ type: "success", message: copy.statusUploaded });
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Upload failed.",
+        message:
+          error instanceof Error ? error.message : copy.statusUploadFailed,
       });
     } finally {
       setIsUploading(false);
@@ -112,9 +115,9 @@ export default function AssetsManager({
   const handleCopy = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
-      setStatus({ type: "success", message: "Asset URL copied." });
+      setStatus({ type: "success", message: copy.statusCopied });
     } catch {
-      setStatus({ type: "error", message: "Could not copy URL." });
+      setStatus({ type: "error", message: copy.statusCopyFailed });
     }
   };
 
@@ -123,16 +126,16 @@ export default function AssetsManager({
       <div className="border-b border-slate-200/70 bg-white">
         <div className="container mx-auto px-6 py-6">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-            Assets library
+            {copy.libraryEyebrow}
           </p>
           <h1 className="mt-3 text-3xl font-semibold text-slate-900">
-            Assets
+            {copy.title}
           </h1>
           <p className="mt-2 text-slate-600">
-            Upload images to reuse in your site builder and docs.
+            {copy.description}
           </p>
           <p className="mt-1 text-xs text-slate-400">
-            Active tenant: {tenantSlug} · Locale: {lang.toUpperCase()}
+            {copy.activeTenant}: {tenantSlug} \u00b7 {copy.locale}: {lang.toUpperCase()}
           </p>
         </div>
       </div>
@@ -142,10 +145,10 @@ export default function AssetsManager({
           <CardContent className="space-y-4">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                Upload a new image
+                {copy.uploadTitle}
               </h2>
               <p className="mt-1 text-sm text-slate-500">
-                JPEG, PNG, WEBP, or GIF up to 10MB.
+                {copy.uploadHint}
               </p>
             </div>
             <div className="flex flex-col gap-4 md:flex-row md:items-center">
@@ -163,7 +166,7 @@ export default function AssetsManager({
                 onClick={handleUpload}
                 disabled={!selectedFile || isUploading}
               >
-                {isUploading ? "Uploading..." : "Upload asset"}
+                {isUploading ? copy.uploading : copy.uploadButton}
               </Button>
             </div>
             {status.type !== "idle" ? (
@@ -183,15 +186,15 @@ export default function AssetsManager({
         <section>
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-slate-900">
-              Uploaded assets
+              {copy.uploadedAssets}
             </h2>
             <span className="text-xs text-slate-400">
-              {items.length} total
+              {formatMessage(copy.totalLabel, { count: items.length })}
             </span>
           </div>
           {items.length === 0 ? (
             <div className="mt-4 rounded-2xl border border-dashed border-slate-200 p-8 text-center text-sm text-slate-500">
-              No assets uploaded yet.
+              {copy.emptyState}
             </div>
           ) : (
             <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -212,7 +215,9 @@ export default function AssetsManager({
                       {formatBytes(asset.sizeBytes)} · {asset.mimeType}
                     </div>
                     <div className="text-xs text-slate-400">
-                      Uploaded {formatDate(asset.createdAt)}
+                      {formatMessage(copy.uploadedAt, {
+                        date: formatDate(asset.createdAt),
+                      })}
                     </div>
                     <div className="flex items-center gap-2">
                       <Button
@@ -221,7 +226,7 @@ export default function AssetsManager({
                         size="default"
                         onClick={() => handleCopy(asset.url)}
                       >
-                        Copy URL
+                        {copy.copyUrl}
                       </Button>
                       <a
                         href={asset.url}
@@ -229,7 +234,7 @@ export default function AssetsManager({
                         rel="noreferrer"
                         className="text-xs font-semibold text-blue-600 hover:text-blue-700"
                       >
-                        Open
+                        {copy.open}
                       </a>
                     </div>
                   </CardContent>

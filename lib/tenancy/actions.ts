@@ -213,6 +213,7 @@ export async function createPropertyAction(
         update: {
           subject: template.subject,
           htmlBody: template.htmlBody,
+          textBody: template.textBody,
           enabled: template.enabled,
           fromName: template.fromName,
           replyTo: template.replyTo,
@@ -223,6 +224,7 @@ export async function createPropertyAction(
           locale: template.locale,
           subject: template.subject,
           htmlBody: template.htmlBody,
+          textBody: template.textBody,
           enabled: template.enabled,
           fromName: template.fromName,
           replyTo: template.replyTo,

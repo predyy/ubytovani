@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getMessages } from "@/lib/i18n/messages";
 
 type RoomListItem = {
   id: string;
@@ -30,6 +31,7 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
   const [items, setItems] = useState<RoomListItem[]>(rooms);
   const [status, setStatus] = useState<StatusState>({ type: "idle" });
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const copy = getMessages(lang).admin.rooms;
 
   const handleDelete = async (roomId: string) => {
     if (deletingId) {
@@ -45,15 +47,15 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
       });
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to delete room.");
+        throw new Error(payload.error || copy.deleteError);
       }
 
       setItems((prev) => prev.filter((room) => room.id !== roomId));
-      setStatus({ type: "success", message: "Room deleted." });
+      setStatus({ type: "success", message: copy.deleteSuccess });
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Failed to delete room.",
+        message: error instanceof Error ? error.message : copy.deleteError,
       });
     } finally {
       setDeletingId(null);
@@ -65,20 +67,22 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
       <div className="border-b border-slate-200/70 bg-white">
         <div className="container mx-auto flex flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rooms</p>
-            <h1 className="mt-3 text-3xl font-semibold text-slate-900">Rooms</h1>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+              {copy.eyebrow}
+            </p>
+            <h1 className="mt-3 text-3xl font-semibold text-slate-900">{copy.title}</h1>
             <p className="mt-2 text-slate-600">
-              Manage room descriptions, amenities, and galleries.
+              {copy.description}
             </p>
             <p className="mt-1 text-xs text-slate-400">
-              Active tenant: {tenantSlug} | Locale: {lang.toUpperCase()}
+              {copy.activeTenant}: {tenantSlug} | {copy.locale}: {lang.toUpperCase()}
             </p>
           </div>
           <Link
             href={`/${lang}/rooms/new`}
             className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
-            Create room
+            {copy.createRoom}
           </Link>
         </div>
       </div>
@@ -98,7 +102,7 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
 
         {items.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center text-sm text-slate-500">
-            No rooms yet. Create the first one to get started.
+            {copy.emptyState}
           </div>
         ) : (
           <div className="grid gap-4">
@@ -127,7 +131,7 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
                               : "bg-slate-200 text-slate-600"
                           }`}
                         >
-                          {room.isActive ? "Active" : "Inactive"}
+                          {room.isActive ? copy.active : copy.inactive}
                         </span>
                       </div>
                       <p className="mt-1 text-sm text-slate-600 line-clamp-2">
@@ -145,7 +149,7 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
                       href={`/${lang}/rooms/${room.id}/edit`}
                       className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
                     >
-                      Edit
+                      {copy.edit}
                     </Link>
                     <Button
                       type="button"
@@ -153,7 +157,7 @@ export default function RoomsManager({ lang, tenantSlug, rooms }: RoomsManagerPr
                       onClick={() => handleDelete(room.id)}
                       disabled={deletingId === room.id}
                     >
-                      {deletingId === room.id ? "Deleting..." : "Delete"}
+                      {deletingId === room.id ? copy.deleting : copy.delete}
                     </Button>
                   </div>
                 </CardContent>

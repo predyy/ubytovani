@@ -4,6 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import type { OnboardingActionState } from "@/lib/tenancy/actions";
+import { getMessages } from "@/lib/i18n/messages";
 
 type OnboardingPropertyFormProps = {
   lang: string;
@@ -22,6 +23,7 @@ export default function OnboardingPropertyForm({
   action,
 }: OnboardingPropertyFormProps) {
   const [state, formAction] = useFormState(action, initialState);
+  const copy = getMessages(lang).admin.onboardingPropertyForm;
 
   return (
     <form action={formAction} className="space-y-6">
@@ -32,13 +34,13 @@ export default function OnboardingPropertyForm({
           className="text-sm font-medium text-slate-700"
           htmlFor="propertyType"
         >
-          Property type
+          {copy.propertyType}
         </label>
         <input
           id="propertyType"
           name="propertyType"
           required
-          placeholder="Apartment, villa, cabin..."
+          placeholder={copy.propertyTypePlaceholder}
           className="h-11 w-full rounded-xl border border-slate-200 px-4 text-sm text-slate-900 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
         />
       </div>
@@ -48,7 +50,7 @@ export default function OnboardingPropertyForm({
             className="text-sm font-medium text-slate-700"
             htmlFor="roomCount"
           >
-            Room count
+            {copy.roomCount}
           </label>
           <input
             id="roomCount"
@@ -64,7 +66,7 @@ export default function OnboardingPropertyForm({
             className="text-sm font-medium text-slate-700"
             htmlFor="maxGuests"
           >
-            Max guests (optional)
+            {copy.maxGuests}
           </label>
           <input
             id="maxGuests"
@@ -80,12 +82,12 @@ export default function OnboardingPropertyForm({
           {state.error}
         </div>
       ) : null}
-      <SubmitButton label="Save property" />
+      <SubmitButton label={copy.submit} savingLabel={copy.saving} />
     </form>
   );
 }
 
-function SubmitButton({ label }: { label: string }) {
+function SubmitButton({ label, savingLabel }: { label: string; savingLabel: string }) {
   const { pending } = useFormStatus();
 
   return (
@@ -95,7 +97,7 @@ function SubmitButton({ label }: { label: string }) {
       className="w-full"
       disabled={pending}
     >
-      {pending ? "Saving..." : label}
+      {pending ? savingLabel : label}
     </Button>
   );
 }

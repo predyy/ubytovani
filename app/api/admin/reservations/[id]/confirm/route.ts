@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 
 import { prisma } from "@/lib/prisma";
 import { requireAdminTenant } from "@/lib/uploads/admin-context";
+import { sendBookingConfirmedEmails } from "@/lib/email/booking";
 
 class ReservationConflictError extends Error {
   constructor(message: string) {
@@ -93,6 +94,10 @@ export async function POST(
       },
       { isolationLevel: Prisma.TransactionIsolationLevel.Serializable },
     );
+
+    sendBookingConfirmedEmails(reservation.id).catch((sendError) => {
+      console.error("Failed to send confirmation emails", sendError);
+    });
 
     return NextResponse.json({
       reservation: {

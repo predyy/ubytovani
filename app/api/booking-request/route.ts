@@ -7,6 +7,10 @@ import { isValidDateRange, parseDateOnly } from "@/lib/dates";
 import { resolvePublicTenant } from "@/lib/tenancy/public-tenant";
 import { getClientIp } from "@/lib/request";
 import { checkRateLimit } from "@/lib/rate-limit";
+import {
+  sendBookingConfirmedEmails,
+  sendBookingRequestEmails,
+} from "@/lib/email/booking";
 
 const bookingSchema = z.object({
   checkInDate: z.string().min(1),
@@ -145,6 +149,16 @@ export async function POST(request: Request) {
       },
       { isolationLevel: Prisma.TransactionIsolationLevel.Serializable },
     );
+
+    if (reservation.status === "CONFIRMED") {
+      sendBookingConfirmedEmails(reservation.id).catch((sendError) => {
+        console.error("Failed to send confirmation emails", sendError);
+      });
+    } else {
+      sendBookingRequestEmails(reservation.id).catch((sendError) => {
+        console.error("Failed to send booking request emails", sendError);
+      });
+    }
 
     return NextResponse.json({
       id: reservation.id,

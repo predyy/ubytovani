@@ -103,36 +103,54 @@ async function main() {
       subject: "We received your booking request",
       htmlBody:
         "<p>Hi {{guestName}},</p><p>Thanks for your request. We will confirm availability shortly.</p>",
+      textBody:
+        "Hi {{guestName}},\n\nThanks for your request. We will confirm availability shortly.",
+      enabled: true,
     },
     {
       type: "BOOKING_REQUEST_HOST",
       subject: "New booking request received",
       htmlBody:
         "<p>You have a new booking request from {{guestName}} for {{checkIn}} to {{checkOut}}.</p>",
+      textBody:
+        "You have a new booking request from {{guestName}} for {{checkIn}} to {{checkOut}}.",
+      enabled: true,
     },
     {
       type: "BOOKING_CONFIRMED_GUEST",
       subject: "Your booking is confirmed",
       htmlBody:
         "<p>Great news, {{guestName}}! Your booking is confirmed for {{checkIn}} to {{checkOut}}.</p>",
+      textBody:
+        "Great news, {{guestName}}! Your booking is confirmed for {{checkIn}} to {{checkOut}}.",
+      enabled: true,
     },
     {
       type: "BOOKING_CONFIRMED_HOST",
       subject: "Booking confirmed",
       htmlBody:
         "<p>Your booking with {{guestName}} is confirmed. Guests arrive on {{checkIn}}.</p>",
+      textBody:
+        "Your booking with {{guestName}} is confirmed. Guests arrive on {{checkIn}}.",
+      enabled: false,
     },
     {
       type: "BOOKING_CANCELLED_GUEST",
       subject: "Your booking has been cancelled",
       htmlBody:
         "<p>Hi {{guestName}}, your booking for {{checkIn}} to {{checkOut}} was cancelled.</p>",
+      textBody:
+        "Hi {{guestName}}, your booking for {{checkIn}} to {{checkOut}} was cancelled.",
+      enabled: true,
     },
     {
       type: "BOOKING_CANCELLED_HOST",
       subject: "Booking cancelled",
       htmlBody:
         "<p>The booking for {{guestName}} ({{checkIn}} to {{checkOut}}) was cancelled.</p>",
+      textBody:
+        "The booking for {{guestName}} ({{checkIn}} to {{checkOut}}) was cancelled.",
+      enabled: false,
     },
   ];
 
@@ -149,7 +167,7 @@ async function main() {
       create: {
         tenantId: null,
         locale,
-        enabled: true,
+        enabled: template.enabled ?? true,
         ...template,
       },
     });

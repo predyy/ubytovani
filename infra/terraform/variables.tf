@@ -11,3 +11,13 @@ variable "aws_region" {
 variable "terraform_iam_user" {
   type = string
 }
+
+variable "ses_from_email" {
+  type    = string
+  default = ""
+}
+
+variable "ses_domain" {
+  type    = string
+  default = ""
+}

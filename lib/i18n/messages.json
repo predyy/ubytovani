@@ -1,0 +1,1274 @@
+{
+  "en": {
+    "common": {
+      "brand": "StayHost",
+      "brandShort": "SH",
+      "languageLabel": "Language"
+    },
+    "marketing": {
+      "landing": {
+        "nav": {
+          "features": "Features",
+          "howItWorks": "How it works",
+          "templates": "Templates",
+          "pricing": "Pricing",
+          "login": "Login",
+          "startFree": "Start free"
+        },
+        "hero": {
+          "badge": "Launch your booking site this afternoon",
+          "title": "A multi-tenant booking platform built for accommodation hosts",
+          "description": "Create a single-page property site, manage availability, and accept booking requests. Every host gets a subdomain, multi-language routing, and a private admin workspace.",
+          "primaryCta": "Build your site",
+          "secondaryCta": "View live demo",
+          "checklist": [
+            "No credit card required",
+            "Free tenant subdomain",
+            "Single-page site by default"
+          ],
+          "bookingsThisWeek": "Bookings this week",
+          "previewAlt": "Admin dashboard preview"
+        },
+        "features": {
+          "title": "Everything you need to run your accommodation business",
+          "description": "Build a guest-facing site, accept bookings, and keep your admin work separated from your public tenant experience.",
+          "items": [
+            {
+              "title": "WYSIWYG site builder",
+              "description": "Edit your single-page site with drag-and-drop sections. Publish instantly on your subdomain."
+            },
+            {
+              "title": "Availability calendar",
+              "description": "Block dates, sync reservations, and keep your inventory accurate across channels."
+            },
+            {
+              "title": "Private admin space",
+              "description": "Hosts manage bookings, settings, and emails in a secure admin dashboard."
+            },
+            {
+              "title": "Multi-language routing",
+              "description": "Every tenant uses /{lang} routes with locale enforcement and future paid upgrades."
+            },
+            {
+              "title": "Custom templates",
+              "description": "Choose from curated layouts designed for modern accommodation brands."
+            },
+            {
+              "title": "Configurable emails",
+              "description": "Customize all guest and host emails per locale with your branding."
+            }
+          ]
+        },
+        "steps": {
+          "title": "Launch your site in four steps",
+          "description": "From signup to bookings without touching a line of code.",
+          "items": [
+            {
+              "number": "1",
+              "title": "Register",
+              "description": "Create your host account."
+            },
+            {
+              "number": "2",
+              "title": "Pick a template",
+              "description": "Choose a layout built for stays."
+            },
+            {
+              "number": "3",
+              "title": "Customize",
+              "description": "Add photos, amenities, and availability."
+            },
+            {
+              "number": "4",
+              "title": "Publish",
+              "description": "Go live on your subdomain."
+            }
+          ]
+        },
+        "templates": {
+          "title": "Templates that feel like boutique brands",
+          "description": "Curated designs that keep the focus on your property and story.",
+          "items": [
+            {
+              "name": "Modern Minimal",
+              "image": "https://images.unsplash.com/photo-1642132652859-3ef5a1048fd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWJzaXRlJTIwdGVtcGxhdGV8ZW58MXx8fHwxNzY2NzEzNzM4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            },
+            {
+              "name": "Luxury Resort",
+              "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY2NzM5Mzc0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            },
+            {
+              "name": "Cozy Boutique",
+              "image": "https://images.unsplash.com/photo-1652481462565-3cfb977049a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NvbW1vZGF0aW9uJTIwcHJvcGVydHl8ZW58MXx8fHwxNzY2NzM5Mzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            }
+          ]
+        },
+        "testimonials": {
+          "title": "Trusted by accommodation owners",
+          "items": [
+            {
+              "quote": "We launched our site in a weekend and immediately started taking direct bookings.",
+              "author": "Sarah Johnson",
+              "role": "B&B Owner, Vermont"
+            },
+            {
+              "quote": "The availability calendar keeps us in sync with Airbnb without the headaches.",
+              "author": "Michael Chen",
+              "role": "Vacation Rental Owner, California"
+            },
+            {
+              "quote": "The templates look premium and the admin experience feels private and secure.",
+              "author": "Emma Williams",
+              "role": "Boutique Hotel Manager, Oregon"
+            }
+          ]
+        },
+        "pricing": {
+          "title": "Simple pricing that grows with you",
+          "description": "Start free, upgrade when you need multi-language and custom domains.",
+          "tiers": [
+            {
+              "name": "Starter",
+              "price": "Free",
+              "features": [
+                "Tenant subdomain",
+                "Single-language site",
+                "Booking requests",
+                "Availability calendar"
+              ]
+            },
+            {
+              "name": "Professional",
+              "price": "$19/mo",
+              "featured": true,
+              "features": [
+                "Custom domain",
+                "Multi-language support",
+                "Premium templates",
+                "Airbnb sync",
+                "Priority support"
+              ]
+            },
+            {
+              "name": "Enterprise",
+              "price": "$49/mo",
+              "features": [
+                "Everything in Pro",
+                "White-label experience",
+                "API access",
+                "Dedicated onboarding"
+              ]
+            }
+          ],
+          "featuredLabel": "Most popular",
+          "cta": "Get started"
+        },
+        "cta": {
+          "title": "Ready to publish your property site?",
+          "description": "Join hosts building their booking business on StayHost.",
+          "button": "Create your website"
+        },
+        "footer": {
+          "description": "The multi-tenant platform for accommodation websites, bookings, and guest communication.",
+          "product": "Product",
+          "company": "Company",
+          "support": "Support",
+          "features": "Features",
+          "templates": "Templates",
+          "pricing": "Pricing",
+          "roadmap": "Roadmap",
+          "careers": "Careers",
+          "press": "Press",
+          "login": "Login",
+          "register": "Register",
+          "help": "Help center",
+          "copyright": "\u00a9 2024 StayHost. All rights reserved."
+        }
+      },
+      "pricingPage": {
+        "login": "Login",
+        "startFree": "Start free",
+        "title": "Pricing built for hosts",
+        "description": "Start with the essentials, unlock advanced features when you are ready.",
+        "featuredLabel": "Most popular",
+        "tiers": [
+          {
+            "name": "Starter",
+            "price": "Free",
+            "features": [
+              "Tenant subdomain",
+              "Single language",
+              "Booking requests",
+              "Availability calendar"
+            ]
+          },
+          {
+            "name": "Professional",
+            "price": "$19/mo",
+            "featured": true,
+            "features": [
+              "Custom domain",
+              "Multi-language",
+              "Premium templates",
+              "Airbnb sync",
+              "Priority support"
+            ]
+          },
+          {
+            "name": "Enterprise",
+            "price": "$49/mo",
+            "features": [
+              "White-label",
+              "API access",
+              "Dedicated onboarding",
+              "Custom integrations"
+            ]
+          }
+        ]
+      }
+    },
+    "admin": {
+      "layout": {
+        "adminMenu": "Admin menu",
+        "navItems": {
+          "dashboard": "Dashboard",
+          "siteBuilder": "Site Builder",
+          "assets": "Assets",
+          "docs": "Docs",
+          "rooms": "Rooms",
+          "availability": "Availability",
+          "bookings": "Bookings",
+          "emails": "Emails"
+        }
+      },
+      "nav": {
+        "administration": "Administration",
+        "propertyTypeMissing": "Property type not set",
+        "logout": "Log out"
+      },
+      "authForm": {
+        "email": "Email",
+        "password": "Password",
+        "createAccount": "Create account",
+        "signIn": "Sign in",
+        "working": "Working...",
+        "alreadyHaveAccount": "Already have an account?",
+        "newTo": "New to {{brand}}?"
+      },
+      "login": {
+        "title": "Welcome back",
+        "description": "Sign in to manage your accommodation site."
+      },
+      "signup": {
+        "title": "Create your account",
+        "description": "Start building your booking site in minutes."
+      },
+      "onboarding": {
+        "step1Title": "Create your tenant",
+        "step1Subtitle": "Start by naming your accommodation business and choosing a subdomain.",
+        "step2Title": "Tell us about your property",
+        "step2Subtitle": "We use these basics to personalize your dashboard and website.",
+        "step3Title": "Your site is ready",
+        "step3Subtitle": "We created your initial site content and email templates.",
+        "publicUrlLabel": "Your public URL",
+        "goToDashboard": "Go to dashboard",
+        "viewPublicSite": "View public site"
+      },
+      "onboardingTenantForm": {
+        "nameLabel": "Tenant name",
+        "namePlaceholder": "E.g. Seaside Villas",
+        "slugLabel": "Subdomain slug",
+        "slugPlaceholder": "seaside-villas",
+        "slugHint": "This becomes your public URL subdomain.",
+        "defaultLanguage": "Default language",
+        "submit": "Create tenant",
+        "saving": "Saving..."
+      },
+      "onboardingPropertyForm": {
+        "propertyType": "Property type",
+        "propertyTypePlaceholder": "Apartment, villa, cabin...",
+        "roomCount": "Room count",
+        "maxGuests": "Max guests (optional)",
+        "submit": "Save property",
+        "saving": "Saving..."
+      },
+      "dashboard": {
+        "noTenantTitle": "No tenant selected",
+        "noTenantDescription": "Create your first tenant to access the dashboard.",
+        "startOnboarding": "Start onboarding",
+        "headerEyebrow": "Admin dashboard",
+        "headerTitle": "Dashboard",
+        "headerDescription": "Manage bookings, availability, and your site content.",
+        "viewPublicSite": "View public site",
+        "logout": "Log out",
+        "tenantLabel": "Tenant",
+        "defaultLocale": "Default locale",
+        "propertyLabel": "Property",
+        "roomsLabel": "Rooms",
+        "maxGuestsLabel": "Max guests",
+        "addPropertyHint": "Add property details in onboarding.",
+        "publicUrlLabel": "Public URL",
+        "shareHint": "Share this with guests once you are ready.",
+        "openWorkspace": "Open {{label}} workspace"
+      },
+      "assets": {
+        "libraryEyebrow": "Assets library",
+        "title": "Assets",
+        "description": "Upload images to reuse in your site builder and docs.",
+        "activeTenant": "Active tenant",
+        "locale": "Locale",
+        "uploadTitle": "Upload a new image",
+        "uploadHint": "JPEG, PNG, WEBP, or GIF up to 10MB.",
+        "uploading": "Uploading...",
+        "uploadButton": "Upload asset",
+        "uploadedAssets": "Uploaded assets",
+        "totalLabel": "{{count}} total",
+        "emptyState": "No assets uploaded yet.",
+        "uploadedAt": "Uploaded {{date}}",
+        "copyUrl": "Copy URL",
+        "open": "Open",
+        "statusUploaded": "Asset uploaded.",
+        "statusUploadFailed": "Upload failed.",
+        "statusCopied": "Asset URL copied.",
+        "statusCopyFailed": "Could not copy URL."
+      },
+      "availability": {
+        "eyebrow": "Availability",
+        "title": "Availability blocks",
+        "description": "Block dates to prevent new bookings on those nights.",
+        "activeTenant": "Active tenant",
+        "locale": "Locale",
+        "createTitle": "Create a manual block",
+        "createHint": "Blocks are date ranges where check-ins are not allowed.",
+        "roomLabel": "Room",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "reasonLabel": "Reason (optional)",
+        "reasonPlaceholder": "Owner stay",
+        "saving": "Saving...",
+        "createButton": "Create block",
+        "upcomingTitle": "Upcoming blocks",
+        "totalLabel": "{{count}} total",
+        "emptyState": "No availability blocks yet.",
+        "deleting": "Deleting...",
+        "delete": "Delete",
+        "roomInactive": " (inactive)",
+        "nights": {
+          "one": "night",
+          "few": "nights",
+          "many": "nights"
+        },
+        "selectRoomError": "Please select a room.",
+        "invalidRangeError": "Please select a valid date range.",
+        "createSuccess": "Block created.",
+        "createFailure": "Failed to create block.",
+        "deleteSuccess": "Block deleted.",
+        "deleteFailure": "Failed to delete block."
+      },
+      "bookings": {
+        "eyebrow": "Bookings",
+        "title": "Booking requests",
+        "description": "Review booking requests and confirm or cancel reservations.",
+        "activeTenant": "Active tenant",
+        "locale": "Locale",
+        "policyTitle": "Booking policy",
+        "policyHint": "Auto-confirm immediately blocks dates and skips manual approval.",
+        "autoConfirmLabel": "Auto-confirm booking requests",
+        "filtersTitle": "Filters",
+        "filtersHint": "Narrow down by status or date range.",
+        "statusLabel": "Status",
+        "statusAll": "All",
+        "fromLabel": "From",
+        "toLabel": "To",
+        "applyFilters": "Apply filters",
+        "reservationsTitle": "Reservations",
+        "totalLabel": "{{count}} total",
+        "emptyFiltered": "No reservations match the current filters.",
+        "empty": "No reservations yet.",
+        "phoneLabel": "Phone",
+        "guestsLabel": "Guests",
+        "createdLabel": "Created {{date}}",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "working": "Working...",
+        "guestMessage": "Guest message",
+        "statusLabels": {
+          "PENDING": "Pending",
+          "CONFIRMED": "Confirmed",
+          "CANCELLED": "Cancelled"
+        },
+        "confirmError": "Failed to confirm reservation.",
+        "confirmSuccess": "Reservation confirmed.",
+        "cancelError": "Failed to cancel reservation.",
+        "cancelSuccess": "Reservation cancelled.",
+        "settingsDenied": "You do not have permission to update booking settings.",
+        "settingsError": "Failed to update booking settings.",
+        "settingsSuccess": "Booking settings updated."
+      },
+      "rooms": {
+        "eyebrow": "Rooms",
+        "title": "Rooms",
+        "description": "Manage room descriptions, amenities, and galleries.",
+        "activeTenant": "Active tenant",
+        "locale": "Locale",
+        "createRoom": "Create room",
+        "deleteSuccess": "Room deleted.",
+        "deleteError": "Failed to delete room.",
+        "emptyState": "No rooms yet. Create the first one to get started.",
+        "active": "Active",
+        "inactive": "Inactive",
+        "edit": "Edit",
+        "deleting": "Deleting...",
+        "delete": "Delete"
+      },
+      "roomForm": {
+        "eyebrow": "Rooms",
+        "createTitle": "Create room",
+        "editTitle": "Edit room",
+        "description": "Add photos, amenities, and descriptions for each room.",
+        "activeTenant": "Active tenant",
+        "locale": "Locale",
+        "backToRooms": "Back to rooms",
+        "roomName": "Room name",
+        "roomNamePlaceholder": "Deluxe King Suite",
+        "slugLabel": "Slug (optional)",
+        "slugPlaceholder": "deluxe-king",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Describe the room layout, highlights, and included amenities.",
+        "amenitiesLabel": "Amenities (comma separated)",
+        "amenitiesPlaceholder": "Wi-Fi, Balcony, Coffee machine",
+        "maxGuests": "Max guests",
+        "activeRoom": "Active room",
+        "galleryTitle": "Gallery",
+        "galleryHint": "Select uploaded assets to include in this room gallery.",
+        "noAssets": "No assets available. Upload images in the Assets tab first.",
+        "selected": "Selected",
+        "select": "Select",
+        "saveRoom": "Save room",
+        "saving": "Saving...",
+        "requiredError": "Name and description are required.",
+        "saveSuccess": "Room saved.",
+        "saveError": "Failed to save room."
+      },
+      "staticDocs": {
+        "eyebrow": "Static docs",
+        "title": "Documents",
+        "description": "Upload Terms and Privacy docs for your public site.",
+        "activeTenant": "Active tenant",
+        "localeLabel": "Locale",
+        "termsLabel": "Terms",
+        "privacyLabel": "Privacy",
+        "termsDocTitle": "Terms document",
+        "privacyDocTitle": "Privacy document",
+        "uploadHint": "Upload Markdown or PDF (default locale only).",
+        "documentTitle": "Document title",
+        "uploadFile": "Upload file",
+        "currentLocale": "Current locale",
+        "uploading": "Uploading...",
+        "uploadButton": "Upload document",
+        "currentDocument": "Current document",
+        "updatedLabel": "Updated",
+        "previewPublic": "Preview public page",
+        "emptyState": "No document uploaded yet.",
+        "uploadSuccess": "Document uploaded.",
+        "uploadFailed": "Upload failed.",
+        "defaultTitles": {
+          "terms": "Terms of service",
+          "privacy": "Privacy policy"
+        }
+      },
+      "siteBuilder": {
+        "eyebrow": "Site Builder",
+        "title": "Manage site content",
+        "locale": "Locale",
+        "lastSaved": "Last saved {{date}}",
+        "notSaved": "Not saved yet",
+        "lastPublished": "Last published {{date}}",
+        "notPublished": "Not published",
+        "viewLive": "View live site",
+        "saving": "Saving...",
+        "saved": "Saved",
+        "saveDraft": "Save draft",
+        "publish": "Publish",
+        "draftSaved": "Draft saved.",
+        "sitePublished": "Site published.",
+        "readOnly": "You have read-only publishing permissions. Ask an admin to publish changes."
+      },
+      "emails": {
+        "eyebrow": "Emails",
+        "title": "Email templates",
+        "description": "Customize guest and host emails for booking events.",
+        "activeTenant": "Active tenant",
+        "locale": "Locale",
+        "emptyPreview": "\u2014",
+        "sampleContext": {
+          "guestName": "Alex Guest",
+          "guestEmail": "guest@example.com",
+          "checkIn": "2025-05-12",
+          "checkOut": "2025-05-15",
+          "nights": "3",
+          "roomName": "Deluxe Room"
+        },
+        "templateTypesTitle": "Template types",
+        "templateEditorTitle": "Template editor",
+        "editingTemplate": "Editing {{title}}.",
+        "templateFallback": "template",
+        "enabled": "Enabled",
+        "fromNameLabel": "From name (optional)",
+        "fromNamePlaceholder": "Property Team",
+        "replyToLabel": "Reply-to email (optional)",
+        "replyToPlaceholder": "host@example.com",
+        "subjectLabel": "Subject",
+        "htmlBodyLabel": "HTML body",
+        "textBodyLabel": "Text body (optional)",
+        "saveTemplate": "Save template",
+        "saving": "Saving...",
+        "templateSaved": "Template saved.",
+        "templateSaveError": "Failed to save template.",
+        "previewTitle": "Preview",
+        "subjectHeading": "Subject",
+        "noHtmlBody": "No HTML body",
+        "textHeading": "Text",
+        "templateTokensTitle": "Template tokens",
+        "templateTokensHint": "Click a token to insert it into the active field.",
+        "sendTestTitle": "Send test email",
+        "testRecipientLabel": "Test recipient",
+        "testRecipientPlaceholder": "you@example.com",
+        "sendTestButton": "Send test email",
+        "sending": "Sending...",
+        "testSent": "Test email sent.",
+        "testSendError": "Failed to send test email.",
+        "permissionDeniedTemplates": "You do not have permission to update templates.",
+        "permissionDeniedTests": "You do not have permission to send test emails.",
+        "enterTestEmail": "Enter a test email address.",
+        "emailLogTitle": "Email log",
+        "emailLogHint": "Recent email activity for this tenant.",
+        "emailLogEmpty": "No emails have been sent yet.",
+        "toLabel": "To",
+        "subjectShort": "Subject",
+        "logStatusLabels": {
+          "SENT": "SENT",
+          "FAILED": "FAILED"
+        },
+        "templateLabels": {
+          "BOOKING_REQUEST_GUEST": {
+            "title": "Booking request received (guest)",
+            "description": "Sent to the guest after submitting a booking request.",
+            "audience": "Guest"
+          },
+          "BOOKING_REQUEST_HOST": {
+            "title": "New booking request (host)",
+            "description": "Sent to the host when a booking request is created.",
+            "audience": "Host"
+          },
+          "BOOKING_CONFIRMED_GUEST": {
+            "title": "Booking confirmed (guest)",
+            "description": "Sent to the guest after confirmation.",
+            "audience": "Guest"
+          },
+          "BOOKING_CONFIRMED_HOST": {
+            "title": "Booking confirmed (host)",
+            "description": "Optional notification to the host after confirmation.",
+            "audience": "Host"
+          },
+          "BOOKING_CANCELLED_GUEST": {
+            "title": "Booking cancelled (guest)",
+            "description": "Sent to the guest when a booking is cancelled.",
+            "audience": "Guest"
+          },
+          "BOOKING_CANCELLED_HOST": {
+            "title": "Booking cancelled (host)",
+            "description": "Optional notification to the host when a booking is cancelled.",
+            "audience": "Host"
+          }
+        },
+        "templateTokens": [
+          {
+            "token": "guestName",
+            "label": "Guest name"
+          },
+          {
+            "token": "guestEmail",
+            "label": "Guest email"
+          },
+          {
+            "token": "checkIn",
+            "label": "Check-in date (YYYY-MM-DD)"
+          },
+          {
+            "token": "checkOut",
+            "label": "Check-out date (YYYY-MM-DD)"
+          },
+          {
+            "token": "nights",
+            "label": "Number of nights"
+          },
+          {
+            "token": "roomName",
+            "label": "Room name"
+          },
+          {
+            "token": "propertyName",
+            "label": "Property name"
+          },
+          {
+            "token": "tenantName",
+            "label": "Tenant name"
+          },
+          {
+            "token": "siteUrl",
+            "label": "Public site URL"
+          },
+          {
+            "token": "adminBookingUrl",
+            "label": "Admin bookings URL"
+          },
+          {
+            "token": "docsTermsUrl",
+            "label": "Terms URL"
+          },
+          {
+            "token": "docsPrivacyUrl",
+            "label": "Privacy URL"
+          }
+        ]
+      }
+    }
+  },
+  "cs": {
+    "common": {
+      "brand": "StayHost",
+      "brandShort": "SH",
+      "languageLabel": "Jazyk"
+    },
+    "marketing": {
+      "landing": {
+        "nav": {
+          "features": "Funkce",
+          "howItWorks": "Jak to funguje",
+          "templates": "\u0160ablony",
+          "pricing": "Cen\u00edk",
+          "login": "P\u0159ihl\u00e1sit se",
+          "startFree": "Za\u010d\u00edt zdarma"
+        },
+        "hero": {
+          "badge": "Spus\u0165te sv\u016fj rezerva\u010dn\u00ed web je\u0161t\u011b dnes",
+          "title": "Rezerva\u010dn\u00ed platforma pro ubytovatele",
+          "description": "Vytvo\u0159te jednostr\u00e1nkov\u00fd web ubytov\u00e1n\u00ed, spravujte dostupnost a p\u0159ij\u00edmejte \u017e\u00e1dosti o rezervaci. Ka\u017ed\u00fd host dostane subdom\u00e9nu, v\u00edcejazy\u010dn\u00e9 routov\u00e1n\u00ed a soukromou administraci.",
+          "primaryCta": "Vytvo\u0159it web",
+          "secondaryCta": "Zobrazit \u017eiv\u00e9 demo",
+          "checklist": [
+            "Bez kreditn\u00ed karty",
+            "Subdom\u00e9na zdarma",
+            "Jednostr\u00e1nkov\u00fd web v\u00fdchoz\u00ed"
+          ],
+          "bookingsThisWeek": "Rezervace tento t\u00fdden",
+          "previewAlt": "N\u00e1hled administrace"
+        },
+        "features": {
+          "title": "V\u0161e, co pot\u0159ebujete pro provoz ubytov\u00e1n\u00ed",
+          "description": "Vytvo\u0159te web pro hosty, p\u0159ij\u00edmejte rezervace a m\u011bjte administraci odd\u011blenou od ve\u0159ejn\u00e9ho webu.",
+          "items": [
+            {
+              "title": "WYSIWYG editor webu",
+              "description": "Upravujte jednostr\u00e1nkov\u00fd web pomoc\u00ed sekc\u00ed typu drag-and-drop. Publikujte okam\u017eit\u011b na sv\u00e9 subdom\u00e9n\u011b."
+            },
+            {
+              "title": "Kalend\u00e1\u0159 dostupnosti",
+              "description": "Blokujte term\u00edny, synchronizujte rezervace a m\u011bjte kapacity v\u017edy aktu\u00e1ln\u00ed."
+            },
+            {
+              "title": "Soukrom\u00e1 administrace",
+              "description": "Ubytovatel\u00e9 spravuj\u00ed rezervace, nastaven\u00ed i e-maily v bezpe\u010dn\u00e9 administraci."
+            },
+            {
+              "title": "V\u00edcejazy\u010dn\u00e9 routov\u00e1n\u00ed",
+              "description": "Ka\u017ed\u00fd tenant m\u00e1 /{lang} routy s vynucen\u00edm locale a prostor pro placen\u00e9 upgrady."
+            },
+            {
+              "title": "Vlastn\u00ed \u0161ablony",
+              "description": "Vyberte si z kur\u00e1torsk\u00fdch layout\u016f pro modern\u00ed ubytov\u00e1n\u00ed."
+            },
+            {
+              "title": "Konfigurovateln\u00e9 e-maily",
+              "description": "P\u0159izp\u016fsobte si e-maily pro hosty i ubytovatele podle jazyka a va\u0161\u00ed zna\u010dky."
+            }
+          ]
+        },
+        "steps": {
+          "title": "Spus\u0165te web ve \u010dty\u0159ech kroc\u00edch",
+          "description": "Od registrace po rezervace bez jedin\u00e9ho \u0159\u00e1dku k\u00f3du.",
+          "items": [
+            {
+              "number": "1",
+              "title": "Registrace",
+              "description": "Vytvo\u0159te si \u00fa\u010det ubytovatele."
+            },
+            {
+              "number": "2",
+              "title": "Vyberte \u0161ablonu",
+              "description": "Zvolte layout pro ubytov\u00e1n\u00ed."
+            },
+            {
+              "number": "3",
+              "title": "P\u0159izp\u016fsobte",
+              "description": "P\u0159idejte fotky, vybaven\u00ed a dostupnost."
+            },
+            {
+              "number": "4",
+              "title": "Publikujte",
+              "description": "Spus\u0165te web na sv\u00e9 subdom\u00e9n\u011b."
+            }
+          ]
+        },
+        "templates": {
+          "title": "\u0160ablony s atmosf\u00e9rou butikov\u00fdch zna\u010dek",
+          "description": "Kur\u00e1torsk\u00e9 designy, kter\u00e9 dr\u017e\u00ed pozornost na va\u0161em ubytov\u00e1n\u00ed a p\u0159\u00edb\u011bhu.",
+          "items": [
+            {
+              "name": "Modern\u00ed minimal",
+              "image": "https://images.unsplash.com/photo-1642132652859-3ef5a1048fd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWJzaXRlJTIwdGVtcGxhdGV8ZW58MXx8fHwxNzY2NzEzNzM4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            },
+            {
+              "name": "Luxusn\u00ed resort",
+              "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY2NzM5Mzc0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            },
+            {
+              "name": "\u00datuln\u00fd boutique",
+              "image": "https://images.unsplash.com/photo-1652481462565-3cfb977049a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NvbW1vZGF0aW9uJTIwcHJvcGVydHl8ZW58MXx8fHwxNzY2NzM5Mzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            }
+          ]
+        },
+        "testimonials": {
+          "title": "D\u016fv\u011b\u0159uj\u00ed n\u00e1m ubytovatel\u00e9",
+          "items": [
+            {
+              "quote": "Web jsme spustili za v\u00edkend a hned jsme za\u010dali p\u0159ij\u00edmat p\u0159\u00edm\u00e9 rezervace.",
+              "author": "Sarah Johnson",
+              "role": "Majitel B&B, Vermont"
+            },
+            {
+              "quote": "Kalend\u00e1\u0159 dostupnosti n\u00e1s dr\u017e\u00ed v synchronizaci s Airbnb bez starost\u00ed.",
+              "author": "Michael Chen",
+              "role": "Majitel rekrea\u010dn\u00edho ubytov\u00e1n\u00ed, Kalifornie"
+            },
+            {
+              "quote": "\u0160ablony p\u016fsob\u00ed pr\u00e9miov\u011b a administrace je soukrom\u00e1 a bezpe\u010dn\u00e1.",
+              "author": "Emma Williams",
+              "role": "Mana\u017eer butikov\u00e9ho hotelu, Oregon"
+            }
+          ]
+        },
+        "pricing": {
+          "title": "Jednoduch\u00fd cen\u00edk, kter\u00fd roste s v\u00e1mi",
+          "description": "Za\u010dn\u011bte zdarma a upgradujte, kdy\u017e pot\u0159ebujete v\u00edcejazy\u010dnost a vlastn\u00ed dom\u00e9ny.",
+          "tiers": [
+            {
+              "name": "Starter",
+              "price": "Zdarma",
+              "features": [
+                "Subdom\u00e9na",
+                "Jednojazy\u010dn\u00fd web",
+                "\u017d\u00e1dosti o rezervaci",
+                "Kalend\u00e1\u0159 dostupnosti"
+              ]
+            },
+            {
+              "name": "Professional",
+              "price": "$19/mo",
+              "featured": true,
+              "features": [
+                "Vlastn\u00ed dom\u00e9na",
+                "Podpora v\u00edce jazyk\u016f",
+                "Pr\u00e9miov\u00e9 \u0161ablony",
+                "Synchronizace s Airbnb",
+                "Prioritn\u00ed podpora"
+              ]
+            },
+            {
+              "name": "Enterprise",
+              "price": "$49/mo",
+              "features": [
+                "V\u0161e z Pro",
+                "White-label re\u017eim",
+                "P\u0159\u00edstup k API",
+                "Individu\u00e1ln\u00ed onboarding"
+              ]
+            }
+          ],
+          "featuredLabel": "Nejobl\u00edben\u011bj\u0161\u00ed",
+          "cta": "Za\u010d\u00edt"
+        },
+        "cta": {
+          "title": "P\u0159ipraveni publikovat web ubytov\u00e1n\u00ed?",
+          "description": "P\u0159idejte se k ubytovatel\u016fm, kte\u0159\u00ed buduj\u00ed sv\u016fj rezerva\u010dn\u00ed byznys na StayHost.",
+          "button": "Vytvo\u0159it web"
+        },
+        "footer": {
+          "description": "Multitenantn\u00ed platforma pro ubytovac\u00ed weby, rezervace a komunikaci s hosty.",
+          "product": "Produkt",
+          "company": "Spole\u010dnost",
+          "support": "Podpora",
+          "features": "Funkce",
+          "templates": "\u0160ablony",
+          "pricing": "Cen\u00edk",
+          "roadmap": "Roadmap",
+          "careers": "Kari\u00e9ra",
+          "press": "M\u00e9dia",
+          "login": "P\u0159ihl\u00e1sit se",
+          "register": "Registrace",
+          "help": "Centrum n\u00e1pov\u011bdy",
+          "copyright": "\u00a9 2024 StayHost. V\u0161echna pr\u00e1va vyhrazena."
+        }
+      },
+      "pricingPage": {
+        "login": "P\u0159ihl\u00e1sit se",
+        "startFree": "Za\u010d\u00edt zdarma",
+        "title": "Cen\u00edk pro ubytovatele",
+        "description": "Za\u010dn\u011bte se z\u00e1klady, pokro\u010dil\u00e9 funkce odemkn\u011bte, a\u017e budete p\u0159ipraveni.",
+        "featuredLabel": "Nejobl\u00edben\u011bj\u0161\u00ed",
+        "tiers": [
+          {
+            "name": "Starter",
+            "price": "Zdarma",
+            "features": [
+              "Subdom\u00e9na",
+              "Jednojazy\u010dn\u00fd web",
+              "\u017d\u00e1dosti o rezervaci",
+              "Kalend\u00e1\u0159 dostupnosti"
+            ]
+          },
+          {
+            "name": "Professional",
+            "price": "$19/mo",
+            "featured": true,
+            "features": [
+              "Vlastn\u00ed dom\u00e9na",
+              "Podpora v\u00edce jazyk\u016f",
+              "Pr\u00e9miov\u00e9 \u0161ablony",
+              "Synchronizace s Airbnb",
+              "Prioritn\u00ed podpora"
+            ]
+          },
+          {
+            "name": "Enterprise",
+            "price": "$49/mo",
+            "features": [
+              "White-label re\u017eim",
+              "P\u0159\u00edstup k API",
+              "Individu\u00e1ln\u00ed onboarding",
+              "Vlastn\u00ed integrace"
+            ]
+          }
+        ]
+      }
+    },
+    "admin": {
+      "layout": {
+        "adminMenu": "Menu administrace",
+        "navItems": {
+          "dashboard": "P\u0159ehled",
+          "siteBuilder": "Editor webu",
+          "assets": "M\u00e9dia",
+          "docs": "Dokumenty",
+          "rooms": "Pokoje",
+          "availability": "Dostupnost",
+          "bookings": "Rezervace",
+          "emails": "E-maily"
+        }
+      },
+      "nav": {
+        "administration": "Administrace",
+        "propertyTypeMissing": "Typ ubytov\u00e1n\u00ed nen\u00ed nastaven",
+        "logout": "Odhl\u00e1sit se"
+      },
+      "authForm": {
+        "email": "E-mail",
+        "password": "Heslo",
+        "createAccount": "Vytvo\u0159it \u00fa\u010det",
+        "signIn": "P\u0159ihl\u00e1sit se",
+        "working": "Zpracov\u00e1v\u00e1m...",
+        "alreadyHaveAccount": "U\u017e m\u00e1te \u00fa\u010det?",
+        "newTo": "Poprv\u00e9 na {{brand}}?"
+      },
+      "login": {
+        "title": "V\u00edtejte zp\u011bt",
+        "description": "P\u0159ihlaste se a spravujte sv\u016fj ubytovac\u00ed web."
+      },
+      "signup": {
+        "title": "Vytvo\u0159te si \u00fa\u010det",
+        "description": "Za\u010dn\u011bte budovat rezerva\u010dn\u00ed web za p\u00e1r minut."
+      },
+      "onboarding": {
+        "step1Title": "Vytvo\u0159te tenanta",
+        "step1Subtitle": "Za\u010dn\u011bte pojmenov\u00e1n\u00edm ubytov\u00e1n\u00ed a v\u00fdb\u011brem subdom\u00e9ny.",
+        "step2Title": "Pov\u011bzte n\u00e1m o sv\u00e9m ubytov\u00e1n\u00ed",
+        "step2Subtitle": "Tyto z\u00e1klady pou\u017eijeme k p\u0159izp\u016fsoben\u00ed p\u0159ehledu a webu.",
+        "step3Title": "V\u00e1\u0161 web je p\u0159ipraven",
+        "step3Subtitle": "Vytvo\u0159ili jsme po\u010d\u00e1te\u010dn\u00ed obsah webu a e-mailov\u00e9 \u0161ablony.",
+        "publicUrlLabel": "Ve\u0159ejn\u00e1 URL",
+        "goToDashboard": "P\u0159ej\u00edt na p\u0159ehled",
+        "viewPublicSite": "Zobrazit ve\u0159ejn\u00fd web"
+      },
+      "onboardingTenantForm": {
+        "nameLabel": "N\u00e1zev tenanta",
+        "namePlaceholder": "Nap\u0159. Seaside Villas",
+        "slugLabel": "Slug subdom\u00e9ny",
+        "slugPlaceholder": "seaside-villas",
+        "slugHint": "Toto bude subdom\u00e9na va\u0161eho ve\u0159ejn\u00e9ho webu.",
+        "defaultLanguage": "V\u00fdchoz\u00ed jazyk",
+        "submit": "Vytvo\u0159it tenanta",
+        "saving": "Ukl\u00e1d\u00e1m..."
+      },
+      "onboardingPropertyForm": {
+        "propertyType": "Typ ubytov\u00e1n\u00ed",
+        "propertyTypePlaceholder": "Apartm\u00e1n, vila, chata...",
+        "roomCount": "Po\u010det pokoj\u016f",
+        "maxGuests": "Max. po\u010det host\u016f (voliteln\u00e9)",
+        "submit": "Ulo\u017eit ubytov\u00e1n\u00ed",
+        "saving": "Ukl\u00e1d\u00e1m..."
+      },
+      "dashboard": {
+        "noTenantTitle": "Nen\u00ed vybr\u00e1n tenant",
+        "noTenantDescription": "Vytvo\u0159te prvn\u00edho tenanta pro p\u0159\u00edstup do p\u0159ehledu.",
+        "startOnboarding": "Za\u010d\u00edt onboarding",
+        "headerEyebrow": "Administrace",
+        "headerTitle": "P\u0159ehled",
+        "headerDescription": "Spravujte rezervace, dostupnost a obsah webu.",
+        "viewPublicSite": "Zobrazit ve\u0159ejn\u00fd web",
+        "logout": "Odhl\u00e1sit se",
+        "tenantLabel": "Tenant",
+        "defaultLocale": "V\u00fdchoz\u00ed jazyk",
+        "propertyLabel": "Ubytov\u00e1n\u00ed",
+        "roomsLabel": "Pokoje",
+        "maxGuestsLabel": "Max. host\u00e9",
+        "addPropertyHint": "Dopl\u0148te detaily ubytov\u00e1n\u00ed v onboardingu.",
+        "publicUrlLabel": "Ve\u0159ejn\u00e1 URL",
+        "shareHint": "Sd\u00edlejte s hosty, a\u017e budete p\u0159ipraveni.",
+        "openWorkspace": "Otev\u0159\u00edt sekci {{label}}"
+      },
+      "assets": {
+        "libraryEyebrow": "Knihovna medi\u00ed",
+        "title": "M\u00e9dia",
+        "description": "Nahr\u00e1vejte obr\u00e1zky pro pou\u017eit\u00ed v editoru webu a dokumentech.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "locale": "Jazyk",
+        "uploadTitle": "Nahr\u00e1t nov\u00fd obr\u00e1zek",
+        "uploadHint": "JPEG, PNG, WEBP nebo GIF do 10 MB.",
+        "uploading": "Nahr\u00e1v\u00e1m...",
+        "uploadButton": "Nahr\u00e1t soubor",
+        "uploadedAssets": "Nahran\u00e1 m\u00e9dia",
+        "totalLabel": "{{count}} celkem",
+        "emptyState": "\u017d\u00e1dn\u00e1 m\u00e9dia zat\u00edm nejsou.",
+        "uploadedAt": "Nahr\u00e1no {{date}}",
+        "copyUrl": "Kop\u00edrovat URL",
+        "open": "Otev\u0159\u00edt",
+        "statusUploaded": "Soubor nahr\u00e1n.",
+        "statusUploadFailed": "Nahr\u00e1v\u00e1n\u00ed selhalo.",
+        "statusCopied": "URL souboru zkop\u00edrov\u00e1na.",
+        "statusCopyFailed": "Nepoda\u0159ilo se zkop\u00edrovat URL."
+      },
+      "availability": {
+        "eyebrow": "Dostupnost",
+        "title": "Blokace dostupnosti",
+        "description": "Blokujte term\u00edny, aby nebylo mo\u017en\u00e9 vytvo\u0159it nov\u00e9 rezervace.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "locale": "Jazyk",
+        "createTitle": "Vytvo\u0159it ru\u010dn\u00ed blokaci",
+        "createHint": "Blokace jsou rozsahy dat, kdy nejsou povoleny p\u0159\u00edjezdy.",
+        "roomLabel": "Pokoj",
+        "startDate": "Datum od",
+        "endDate": "Datum do",
+        "reasonLabel": "D\u016fvod (voliteln\u00e9)",
+        "reasonPlaceholder": "Pobyt majitele",
+        "saving": "Ukl\u00e1d\u00e1m...",
+        "createButton": "Vytvo\u0159it blokaci",
+        "upcomingTitle": "Budouc\u00ed blokace",
+        "totalLabel": "{{count}} celkem",
+        "emptyState": "\u017d\u00e1dn\u00e9 blokace zat\u00edm nejsou.",
+        "deleting": "Ma\u017eu...",
+        "delete": "Smazat",
+        "roomInactive": " (neaktivn\u00ed)",
+        "nights": {
+          "one": "noc",
+          "few": "noci",
+          "many": "noc\u00ed"
+        },
+        "selectRoomError": "Vyberte pokoj.",
+        "invalidRangeError": "Vyberte platn\u00fd rozsah dat.",
+        "createSuccess": "Blokace vytvo\u0159ena.",
+        "createFailure": "Nepoda\u0159ilo se vytvo\u0159it blokaci.",
+        "deleteSuccess": "Blokace smaz\u00e1na.",
+        "deleteFailure": "Nepoda\u0159ilo se smazat blokaci."
+      },
+      "bookings": {
+        "eyebrow": "Rezervace",
+        "title": "\u017d\u00e1dosti o rezervaci",
+        "description": "Zkontrolujte \u017e\u00e1dosti o rezervaci a potvr\u010fte nebo zru\u0161te rezervace.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "locale": "Jazyk",
+        "policyTitle": "Z\u00e1sady rezervac\u00ed",
+        "policyHint": "Automatick\u00e9 potvrzen\u00ed ihned blokuje term\u00edny a vynech\u00e1 ru\u010dn\u00ed schvalov\u00e1n\u00ed.",
+        "autoConfirmLabel": "Automaticky potvrzovat \u017e\u00e1dosti o rezervaci",
+        "filtersTitle": "Filtry",
+        "filtersHint": "Up\u0159esn\u011bte podle stavu nebo rozsahu dat.",
+        "statusLabel": "Stav",
+        "statusAll": "V\u0161e",
+        "fromLabel": "Od",
+        "toLabel": "Do",
+        "applyFilters": "Pou\u017e\u00edt filtry",
+        "reservationsTitle": "Rezervace",
+        "totalLabel": "{{count}} celkem",
+        "emptyFiltered": "\u017d\u00e1dn\u00e9 rezervace neodpov\u00eddaj\u00ed filtr\u016fm.",
+        "empty": "\u017d\u00e1dn\u00e9 rezervace zat\u00edm nejsou.",
+        "phoneLabel": "Telefon",
+        "guestsLabel": "Host\u00e9",
+        "createdLabel": "Vytvo\u0159eno {{date}}",
+        "confirm": "Potvrdit",
+        "cancel": "Zru\u0161it",
+        "working": "Zpracov\u00e1v\u00e1m...",
+        "guestMessage": "Zpr\u00e1va od hosta",
+        "statusLabels": {
+          "PENDING": "\u010cek\u00e1",
+          "CONFIRMED": "Potvrzeno",
+          "CANCELLED": "Zru\u0161eno"
+        },
+        "confirmError": "Nepoda\u0159ilo se potvrdit rezervaci.",
+        "confirmSuccess": "Rezervace potvrzena.",
+        "cancelError": "Nepoda\u0159ilo se zru\u0161it rezervaci.",
+        "cancelSuccess": "Rezervace zru\u0161ena.",
+        "settingsDenied": "Nem\u00e1te opr\u00e1vn\u011bn\u00ed upravit nastaven\u00ed rezervac\u00ed.",
+        "settingsError": "Nepoda\u0159ilo se upravit nastaven\u00ed rezervac\u00ed.",
+        "settingsSuccess": "Nastaven\u00ed rezervac\u00ed aktualizov\u00e1no."
+      },
+      "rooms": {
+        "eyebrow": "Pokoje",
+        "title": "Pokoje",
+        "description": "Spravujte popisy pokoj\u016f, vybaven\u00ed a galerie.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "locale": "Jazyk",
+        "createRoom": "Vytvo\u0159it pokoj",
+        "deleteSuccess": "Pokoj smaz\u00e1n.",
+        "deleteError": "Nepoda\u0159ilo se smazat pokoj.",
+        "emptyState": "\u017d\u00e1dn\u00e9 pokoje zat\u00edm nejsou. Vytvo\u0159te prvn\u00ed pokoj.",
+        "active": "Aktivn\u00ed",
+        "inactive": "Neaktivn\u00ed",
+        "edit": "Upravit",
+        "deleting": "Ma\u017eu...",
+        "delete": "Smazat"
+      },
+      "roomForm": {
+        "eyebrow": "Pokoje",
+        "createTitle": "Vytvo\u0159it pokoj",
+        "editTitle": "Upravit pokoj",
+        "description": "P\u0159idejte fotky, vybaven\u00ed a popisy ka\u017ed\u00e9ho pokoje.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "locale": "Jazyk",
+        "backToRooms": "Zp\u011bt na pokoje",
+        "roomName": "N\u00e1zev pokoje",
+        "roomNamePlaceholder": "Apartm\u00e1 Deluxe King",
+        "slugLabel": "Slug (voliteln\u00e9)",
+        "slugPlaceholder": "deluxe-king",
+        "descriptionLabel": "Popis",
+        "descriptionPlaceholder": "Popi\u0161te dispozice pokoje, hlavn\u00ed v\u00fdbavy a vybaven\u00ed.",
+        "amenitiesLabel": "Vybaven\u00ed (odd\u011blen\u00e9 \u010d\u00e1rkou)",
+        "amenitiesPlaceholder": "Wi-Fi, Balkon, K\u00e1vovar",
+        "maxGuests": "Max. host\u00e9",
+        "activeRoom": "Aktivn\u00ed pokoj",
+        "galleryTitle": "Galerie",
+        "galleryHint": "Vyberte nahran\u00e1 m\u00e9dia pro galerii tohoto pokoje.",
+        "noAssets": "\u017d\u00e1dn\u00e1 m\u00e9dia nejsou k dispozici. Nejd\u0159\u00edve nahrajte obr\u00e1zky v sekci M\u00e9dia.",
+        "selected": "Vybr\u00e1no",
+        "select": "Vybrat",
+        "saveRoom": "Ulo\u017eit pokoj",
+        "saving": "Ukl\u00e1d\u00e1m...",
+        "requiredError": "N\u00e1zev a popis jsou povinn\u00e9.",
+        "saveSuccess": "Pokoj ulo\u017een.",
+        "saveError": "Nepoda\u0159ilo se ulo\u017eit pokoj."
+      },
+      "staticDocs": {
+        "eyebrow": "Statick\u00e9 dokumenty",
+        "title": "Dokumenty",
+        "description": "Nahrajte Podm\u00ednky a Z\u00e1sady ochrany osobn\u00edch \u00fadaj\u016f pro ve\u0159ejn\u00fd web.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "localeLabel": "Jazyk",
+        "termsLabel": "Podm\u00ednky",
+        "privacyLabel": "Soukrom\u00ed",
+        "termsDocTitle": "Dokument podm\u00ednek",
+        "privacyDocTitle": "Dokument ochrany soukrom\u00ed",
+        "uploadHint": "Nahrajte Markdown nebo PDF (pouze v\u00fdchoz\u00ed jazyk).",
+        "documentTitle": "N\u00e1zev dokumentu",
+        "uploadFile": "Nahr\u00e1t soubor",
+        "currentLocale": "Aktu\u00e1ln\u00ed jazyk",
+        "uploading": "Nahr\u00e1v\u00e1m...",
+        "uploadButton": "Nahr\u00e1t dokument",
+        "currentDocument": "Aktu\u00e1ln\u00ed dokument",
+        "updatedLabel": "Aktualizov\u00e1no",
+        "previewPublic": "Zobrazit ve\u0159ejnou str\u00e1nku",
+        "emptyState": "\u017d\u00e1dn\u00fd dokument zat\u00edm nen\u00ed.",
+        "uploadSuccess": "Dokument nahr\u00e1n.",
+        "uploadFailed": "Nahr\u00e1v\u00e1n\u00ed selhalo.",
+        "defaultTitles": {
+          "terms": "Podm\u00ednky slu\u017eeb",
+          "privacy": "Z\u00e1sady ochrany soukrom\u00ed"
+        }
+      },
+      "siteBuilder": {
+        "eyebrow": "Editor webu",
+        "title": "Spravujte obsah webu",
+        "locale": "Jazyk",
+        "lastSaved": "Naposledy ulo\u017eeno {{date}}",
+        "notSaved": "Zat\u00edm neulo\u017eeno",
+        "lastPublished": "Naposledy publikov\u00e1no {{date}}",
+        "notPublished": "Nepublikov\u00e1no",
+        "viewLive": "Zobrazit \u017eiv\u00fd web",
+        "saving": "Ukl\u00e1d\u00e1m...",
+        "saved": "Ulo\u017eeno",
+        "saveDraft": "Ulo\u017eit koncept",
+        "publish": "Publikovat",
+        "draftSaved": "Koncept ulo\u017een.",
+        "sitePublished": "Web publikov\u00e1n.",
+        "readOnly": "M\u00e1te pouze \u010dtec\u00ed opr\u00e1vn\u011bn\u00ed pro publikov\u00e1n\u00ed. Po\u017e\u00e1dejte administr\u00e1tora o publikaci zm\u011bn."
+      },
+      "emails": {
+        "eyebrow": "E-maily",
+        "title": "\u0160ablony e-mail\u016f",
+        "description": "P\u0159izp\u016fsobte e-maily pro hosty a ubytovatele podle ud\u00e1lost\u00ed rezervac\u00ed.",
+        "activeTenant": "Aktivn\u00ed tenant",
+        "locale": "Jazyk",
+        "emptyPreview": "\u2014",
+        "sampleContext": {
+          "guestName": "Alex Guest",
+          "guestEmail": "guest@example.com",
+          "checkIn": "2025-05-12",
+          "checkOut": "2025-05-15",
+          "nights": "3",
+          "roomName": "Deluxe Room"
+        },
+        "templateTypesTitle": "Typy \u0161ablon",
+        "templateEditorTitle": "Editor \u0161ablon",
+        "editingTemplate": "Upravujete {{title}}.",
+        "templateFallback": "\u0161ablonu",
+        "enabled": "Zapnuto",
+        "fromNameLabel": "Jm\u00e9no odes\u00edlatele (voliteln\u00e9)",
+        "fromNamePlaceholder": "T\u00fdm ubytov\u00e1n\u00ed",
+        "replyToLabel": "Odpov\u011bd\u011b\u0161t\u011b e-mail (voliteln\u00e9)",
+        "replyToPlaceholder": "host@example.com",
+        "subjectLabel": "P\u0159edm\u011bt",
+        "htmlBodyLabel": "HTML t\u011blo",
+        "textBodyLabel": "Textov\u00e9 t\u011blo (voliteln\u00e9)",
+        "saveTemplate": "Ulo\u017eit \u0161ablonu",
+        "saving": "Ukl\u00e1d\u00e1m...",
+        "templateSaved": "\u0160ablona ulo\u017eena.",
+        "templateSaveError": "Nepoda\u0159ilo se ulo\u017eit \u0161ablonu.",
+        "previewTitle": "N\u00e1hled",
+        "subjectHeading": "P\u0159edm\u011bt",
+        "noHtmlBody": "\u017d\u00e1dn\u00e9 HTML t\u011blo",
+        "textHeading": "Text",
+        "templateTokensTitle": "\u0160ablonov\u00e9 prom\u011bnn\u00e9",
+        "templateTokensHint": "Klikn\u011bte na prom\u011bnnou pro vlo\u017een\u00ed do aktivn\u00edho pole.",
+        "sendTestTitle": "Odeslat testovac\u00ed e-mail",
+        "testRecipientLabel": "Testovac\u00ed p\u0159\u00edjemce",
+        "testRecipientPlaceholder": "you@example.com",
+        "sendTestButton": "Odeslat testovac\u00ed e-mail",
+        "sending": "Odes\u00edl\u00e1m...",
+        "testSent": "Testovac\u00ed e-mail odesl\u00e1n.",
+        "testSendError": "Nepoda\u0159ilo se odeslat testovac\u00ed e-mail.",
+        "permissionDeniedTemplates": "Nem\u00e1te opr\u00e1vn\u011bn\u00ed upravovat \u0161ablony.",
+        "permissionDeniedTests": "Nem\u00e1te opr\u00e1vn\u011bn\u00ed odes\u00edlat testovac\u00ed e-maily.",
+        "enterTestEmail": "Zadejte testovac\u00ed e-mailovou adresu.",
+        "emailLogTitle": "Historie e-mail\u016f",
+        "emailLogHint": "Ned\u00e1vn\u00e1 aktivita e-mail\u016f pro tohoto tenanta.",
+        "emailLogEmpty": "Zat\u00edm nebyly odesl\u00e1ny \u017e\u00e1dn\u00e9 e-maily.",
+        "toLabel": "Komu",
+        "subjectShort": "P\u0159edm\u011bt",
+        "logStatusLabels": {
+          "SENT": "Odesl\u00e1no",
+          "FAILED": "Selhalo"
+        },
+        "templateLabels": {
+          "BOOKING_REQUEST_GUEST": {
+            "title": "P\u0159ijata \u017e\u00e1dost o rezervaci (host)",
+            "description": "Odesl\u00e1no hostovi po odesl\u00e1n\u00ed \u017e\u00e1dosti o rezervaci.",
+            "audience": "Host"
+          },
+          "BOOKING_REQUEST_HOST": {
+            "title": "Nov\u00e1 \u017e\u00e1dost o rezervaci (ubytovatel)",
+            "description": "Odesl\u00e1no ubytovateli p\u0159i vytvo\u0159en\u00ed \u017e\u00e1dosti o rezervaci.",
+            "audience": "Ubytovatel"
+          },
+          "BOOKING_CONFIRMED_GUEST": {
+            "title": "Rezervace potvrzena (host)",
+            "description": "Odesl\u00e1no hostovi po potvrzen\u00ed.",
+            "audience": "Host"
+          },
+          "BOOKING_CONFIRMED_HOST": {
+            "title": "Rezervace potvrzena (ubytovatel)",
+            "description": "Voliteln\u00e9 upozorn\u011bn\u00ed ubytovateli po potvrzen\u00ed.",
+            "audience": "Ubytovatel"
+          },
+          "BOOKING_CANCELLED_GUEST": {
+            "title": "Rezervace zru\u0161ena (host)",
+            "description": "Odesl\u00e1no hostovi p\u0159i zru\u0161en\u00ed rezervace.",
+            "audience": "Host"
+          },
+          "BOOKING_CANCELLED_HOST": {
+            "title": "Rezervace zru\u0161ena (ubytovatel)",
+            "description": "Voliteln\u00e9 upozorn\u011bn\u00ed ubytovateli p\u0159i zru\u0161en\u00ed rezervace.",
+            "audience": "Ubytovatel"
+          }
+        },
+        "templateTokens": [
+          {
+            "token": "guestName",
+            "label": "Jm\u00e9no hosta"
+          },
+          {
+            "token": "guestEmail",
+            "label": "E-mail hosta"
+          },
+          {
+            "token": "checkIn",
+            "label": "Datum p\u0159\u00edjezdu (YYYY-MM-DD)"
+          },
+          {
+            "token": "checkOut",
+            "label": "Datum odjezdu (YYYY-MM-DD)"
+          },
+          {
+            "token": "nights",
+            "label": "Po\u010det noc\u00ed"
+          },
+          {
+            "token": "roomName",
+            "label": "N\u00e1zev pokoje"
+          },
+          {
+            "token": "propertyName",
+            "label": "N\u00e1zev ubytov\u00e1n\u00ed"
+          },
+          {
+            "token": "tenantName",
+            "label": "N\u00e1zev tenanta"
+          },
+          {
+            "token": "siteUrl",
+            "label": "URL ve\u0159ejn\u00e9ho webu"
+          },
+          {
+            "token": "adminBookingUrl",
+            "label": "URL administrace rezervac\u00ed"
+          },
+          {
+            "token": "docsTermsUrl",
+            "label": "URL podm\u00ednek"
+          },
+          {
+            "token": "docsPrivacyUrl",
+            "label": "URL soukrom\u00ed"
+          }
+        ]
+      }
+    }
+  }
+}

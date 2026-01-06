@@ -6,6 +6,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import type { OnboardingActionState } from "@/lib/tenancy/actions";
 import { slugify } from "@/lib/tenancy/slug";
+import { getMessages } from "@/lib/i18n/messages";
 
 type OnboardingTenantFormProps = {
   lang: string;
@@ -29,6 +30,7 @@ export default function OnboardingTenantForm({
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [slugTouched, setSlugTouched] = useState(false);
+  const copy = getMessages(lang).admin.onboardingTenantForm;
 
   useEffect(() => {
     if (!slugTouched) {
@@ -47,7 +49,7 @@ export default function OnboardingTenantForm({
       <input type="hidden" name="lang" value={lang} />
       <div className="space-y-2">
         <label className="text-sm font-medium text-slate-700" htmlFor="name">
-          Tenant name
+          {copy.nameLabel}
         </label>
         <input
           id="name"
@@ -55,13 +57,13 @@ export default function OnboardingTenantForm({
           required
           value={name}
           onChange={(event) => setName(event.target.value)}
-          placeholder="E.g. Seaside Villas"
+          placeholder={copy.namePlaceholder}
           className="h-11 w-full rounded-xl border border-slate-200 px-4 text-sm text-slate-900 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
         />
       </div>
       <div className="space-y-2">
         <label className="text-sm font-medium text-slate-700" htmlFor="slug">
-          Subdomain slug
+          {copy.slugLabel}
         </label>
         <input
           id="slug"
@@ -72,11 +74,11 @@ export default function OnboardingTenantForm({
             setSlugTouched(true);
             setSlug(slugify(event.target.value));
           }}
-          placeholder="seaside-villas"
+          placeholder={copy.slugPlaceholder}
           className="h-11 w-full rounded-xl border border-slate-200 px-4 text-sm text-slate-900 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
         />
         <p className="text-xs text-slate-500">
-          This becomes your public URL subdomain.
+          {copy.slugHint}
         </p>
       </div>
       <div className="space-y-2">
@@ -84,7 +86,7 @@ export default function OnboardingTenantForm({
           className="text-sm font-medium text-slate-700"
           htmlFor="defaultLocale"
         >
-          Default language
+          {copy.defaultLanguage}
         </label>
         <select
           id="defaultLocale"
@@ -104,12 +106,12 @@ export default function OnboardingTenantForm({
           {state.error}
         </div>
       ) : null}
-      <SubmitButton label="Create tenant" />
+      <SubmitButton label={copy.submit} savingLabel={copy.saving} />
     </form>
   );
 }
 
-function SubmitButton({ label }: { label: string }) {
+function SubmitButton({ label, savingLabel }: { label: string; savingLabel: string }) {
   const { pending } = useFormStatus();
 
   return (
@@ -119,7 +121,7 @@ function SubmitButton({ label }: { label: string }) {
       className="w-full"
       disabled={pending}
     >
-      {pending ? "Saving..." : label}
+      {pending ? savingLabel : label}
     </Button>
   );
 }

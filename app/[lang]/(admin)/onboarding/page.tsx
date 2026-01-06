@@ -9,6 +9,7 @@ import {
   createPropertyAction,
   createTenantAction,
 } from "@/lib/tenancy/actions";
+import { getMessages } from "@/lib/i18n/messages";
 import { fallbackLocale, supportedLocales } from "@/lib/i18n/locales";
 
 type OnboardingPageProps = {
@@ -23,6 +24,7 @@ export default async function OnboardingPage({ params }: OnboardingPageProps) {
     lang,
     nextPath: `/${lang}/onboarding`,
   });
+  const copy = getMessages(lang).admin.onboarding;
 
   const membership = await prisma.tenantMember.findFirst({
     where: { userId: user.id },
@@ -33,8 +35,8 @@ export default async function OnboardingPage({ params }: OnboardingPageProps) {
   if (!membership) {
     return (
       <OnboardingShell
-        title="Create your tenant"
-        subtitle="Start by naming your accommodation business and choosing a subdomain."
+        title={copy.step1Title}
+        subtitle={copy.step1Subtitle}
         step={1}
       >
         <OnboardingTenantForm
@@ -54,8 +56,8 @@ export default async function OnboardingPage({ params }: OnboardingPageProps) {
   if (!property) {
     return (
       <OnboardingShell
-        title="Tell us about your property"
-        subtitle="We use these basics to personalize your dashboard and website."
+        title={copy.step2Title}
+        subtitle={copy.step2Subtitle}
         step={2}
       >
         <OnboardingPropertyForm
@@ -73,13 +75,13 @@ export default async function OnboardingPage({ params }: OnboardingPageProps) {
 
   return (
     <OnboardingShell
-      title="Your site is ready"
-      subtitle="We created your initial site content and email templates."
+      title={copy.step3Title}
+      subtitle={copy.step3Subtitle}
       step={3}
     >
       <div className="space-y-6 text-left">
         <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
-          <p className="text-sm text-blue-700">Your public URL</p>
+          <p className="text-sm text-blue-700">{copy.publicUrlLabel}</p>
           <p className="mt-2 text-lg font-semibold text-blue-900">
             {publicUrl}
           </p>
@@ -89,13 +91,13 @@ export default async function OnboardingPage({ params }: OnboardingPageProps) {
             href={`/${lang}/dashboard`}
             className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
-            Go to dashboard
+            {copy.goToDashboard}
           </Link>
           <a
             href={publicUrl}
             className="inline-flex items-center justify-center rounded-full border border-blue-200 px-6 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-50"
           >
-            View public site
+            {copy.viewPublicSite}
           </a>
         </div>
       </div>

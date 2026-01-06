@@ -26,6 +26,7 @@ model Tenant {
   availabilityBlocks AvailabilityBlock[]
   siteConfigs    SitePageConfig[]
   emailTemplates EmailTemplate[]
+  emailLogs      EmailLog[]
   assets         Asset[]
   staticDocs     StaticDoc[]
 }
@@ -146,6 +147,7 @@ model Reservation {
   tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   room     Room?    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  emailLogs EmailLog[]
 
   @@index([tenantId, propertyId, roomId, checkInDate, checkOutDate])
   @@index([status])
@@ -192,6 +194,7 @@ model EmailTemplate {
   locale    String
   subject   String
   htmlBody  String
+  textBody  String?
   enabled   Boolean           @default(true)
   fromName  String?
   replyTo   String?
@@ -202,6 +205,29 @@ model EmailTemplate {
 
   @@unique([tenantId, type, locale])
   @@index([tenantId])
+}
+
+model EmailLog {
+  id           String           @id @default(cuid())
+  tenantId     String
+  reservationId String?
+  type         EmailTemplateType
+  locale       String
+  toEmail      String
+  fromEmail    String
+  subject      String
+  status       EmailLogStatus
+  providerMessageId String?
+  error        String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  reservation Reservation? @relation(fields: [reservationId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([reservationId])
+  @@unique([reservationId, type, locale, toEmail])
 }
 
 model Asset {
@@ -268,6 +294,11 @@ enum EmailTemplateType {
   BOOKING_CONFIRMED_HOST
   BOOKING_CANCELLED_GUEST
   BOOKING_CANCELLED_HOST
+}
+
+enum EmailLogStatus {
+  SENT
+  FAILED
 }
 
 enum ReservationStatus {

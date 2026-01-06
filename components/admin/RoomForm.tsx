@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getMessages } from "@/lib/i18n/messages";
 
 type AssetOption = {
   id: string;
@@ -61,6 +62,7 @@ export default function RoomForm({
   );
   const [status, setStatus] = useState<StatusState>({ type: "idle" });
   const [isSaving, setIsSaving] = useState(false);
+  const copy = getMessages(lang).admin.roomForm;
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -104,7 +106,7 @@ export default function RoomForm({
       .filter(Boolean);
 
     if (!form.name.trim() || !form.description.trim()) {
-      setStatus({ type: "error", message: "Name and description are required." });
+      setStatus({ type: "error", message: copy.requiredError });
       return;
     }
 
@@ -131,17 +133,17 @@ export default function RoomForm({
 
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to save room.");
+        throw new Error(payload.error || copy.saveError);
       }
 
-      setStatus({ type: "success", message: "Room saved." });
+      setStatus({ type: "success", message: copy.saveSuccess });
       if (mode === "create" && payload.room?.id) {
         router.push(`/${lang}/rooms/${payload.room.id}/edit`);
       }
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Failed to save room.",
+        message: error instanceof Error ? error.message : copy.saveError,
       });
     } finally {
       setIsSaving(false);
@@ -153,22 +155,24 @@ export default function RoomForm({
       <div className="border-b border-slate-200/70 bg-white">
         <div className="container mx-auto flex flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rooms</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+              {copy.eyebrow}
+            </p>
             <h1 className="mt-3 text-3xl font-semibold text-slate-900">
-              {mode === "create" ? "Create room" : "Edit room"}
+              {mode === "create" ? copy.createTitle : copy.editTitle}
             </h1>
             <p className="mt-2 text-slate-600">
-              Add photos, amenities, and descriptions for each room.
+              {copy.description}
             </p>
             <p className="mt-1 text-xs text-slate-400">
-              Active tenant: {tenantSlug} | Locale: {lang.toUpperCase()}
+              {copy.activeTenant}: {tenantSlug} | {copy.locale}: {lang.toUpperCase()}
             </p>
           </div>
           <Link
             href={`/${lang}/rooms`}
             className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
           >
-            Back to rooms
+            {copy.backToRooms}
           </Link>
         </div>
       </div>
@@ -180,7 +184,7 @@ export default function RoomForm({
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="grid gap-2">
                   <label className="text-sm font-semibold text-slate-700" htmlFor="name">
-                    Room name
+                    {copy.roomName}
                   </label>
                   <input
                     id="name"
@@ -188,12 +192,12 @@ export default function RoomForm({
                     value={form.name}
                     onChange={handleChange}
                     className="rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700"
-                    placeholder="Deluxe King Suite"
+                    placeholder={copy.roomNamePlaceholder}
                   />
                 </div>
                 <div className="grid gap-2">
                   <label className="text-sm font-semibold text-slate-700" htmlFor="slug">
-                    Slug (optional)
+                    {copy.slugLabel}
                   </label>
                   <input
                     id="slug"
@@ -201,14 +205,14 @@ export default function RoomForm({
                     value={form.slug}
                     onChange={handleChange}
                     className="rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700"
-                    placeholder="deluxe-king"
+                    placeholder={copy.slugPlaceholder}
                   />
                 </div>
               </div>
 
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="description">
-                  Description
+                  {copy.descriptionLabel}
                 </label>
                 <textarea
                   id="description"
@@ -217,14 +221,14 @@ export default function RoomForm({
                   onChange={handleChange}
                   rows={5}
                   className="rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700"
-                  placeholder="Describe the room layout, highlights, and included amenities."
+                  placeholder={copy.descriptionPlaceholder}
                 />
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="grid gap-2">
                   <label className="text-sm font-semibold text-slate-700" htmlFor="amenities">
-                    Amenities (comma separated)
+                    {copy.amenitiesLabel}
                   </label>
                   <input
                     id="amenities"
@@ -232,12 +236,12 @@ export default function RoomForm({
                     value={amenitiesInput}
                     onChange={(event) => setAmenitiesInput(event.target.value)}
                     className="rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700"
-                    placeholder="Wi-Fi, Balcony, Coffee machine"
+                    placeholder={copy.amenitiesPlaceholder}
                   />
                 </div>
                 <div className="grid gap-2">
                   <label className="text-sm font-semibold text-slate-700" htmlFor="maxGuests">
-                    Max guests
+                    {copy.maxGuests}
                   </label>
                   <input
                     id="maxGuests"
@@ -260,17 +264,19 @@ export default function RoomForm({
                   onChange={handleChange}
                   className="h-4 w-4 rounded border-slate-300 text-blue-600"
                 />
-                Active room
+                {copy.activeRoom}
               </label>
 
               <div>
-                <h3 className="text-sm font-semibold text-slate-700">Gallery</h3>
+                <h3 className="text-sm font-semibold text-slate-700">
+                  {copy.galleryTitle}
+                </h3>
                 <p className="mt-1 text-xs text-slate-500">
-                  Select uploaded assets to include in this room gallery.
+                  {copy.galleryHint}
                 </p>
                 {assets.length === 0 ? (
                   <div className="mt-3 rounded-2xl border border-dashed border-slate-200 p-6 text-center text-sm text-slate-500">
-                    No assets available. Upload images in the Assets tab first.
+                    {copy.noAssets}
                   </div>
                 ) : (
                   <div className="mt-4 grid gap-4 md:grid-cols-3">
@@ -295,7 +301,7 @@ export default function RoomForm({
                           <div className="flex items-center justify-between px-3 py-2 text-xs text-slate-600">
                             <span className="truncate">{asset.originalName}</span>
                             <span className="font-semibold">
-                              {isSelected ? "Selected" : "Select"}
+                              {isSelected ? copy.selected : copy.select}
                             </span>
                           </div>
                         </button>
@@ -307,7 +313,7 @@ export default function RoomForm({
 
               <div className="flex flex-wrap items-center gap-3">
                 <Button type="submit" disabled={isSaving}>
-                  {isSaving ? "Saving..." : "Save room"}
+                  {isSaving ? copy.saving : copy.saveRoom}
                 </Button>
                 {status.type !== "idle" ? (
                   <div

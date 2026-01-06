@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { StaticDocSlug } from "@/lib/uploads/constants";
+import { getMessages } from "@/lib/i18n/messages";
 
 type DocItem = {
   id: string;
@@ -35,6 +36,7 @@ export default function StaticDocsManager({
   publicBaseUrl,
   docs,
 }: StaticDocsManagerProps) {
+  const copy = getMessages(lang).admin.staticDocs;
   const initialDocs = useMemo(() => {
     const map = new Map<string, DocItem>();
     docs.forEach((doc) => map.set(doc.slug, doc));
@@ -47,8 +49,8 @@ export default function StaticDocsManager({
     privacy: initialDocs.get("privacy") ?? null,
   });
   const [titleState, setTitleState] = useState<Record<StaticDocSlug, string>>({
-    terms: initialDocs.get("terms")?.title ?? "Terms of service",
-    privacy: initialDocs.get("privacy")?.title ?? "Privacy policy",
+    terms: initialDocs.get("terms")?.title ?? copy.defaultTitles.terms,
+    privacy: initialDocs.get("privacy")?.title ?? copy.defaultTitles.privacy,
   });
   const [fileState, setFileState] = useState<Record<StaticDocSlug, File | null>>({
     terms: null,
@@ -128,11 +130,12 @@ export default function StaticDocsManager({
       const newDoc = confirmPayload.staticDoc as DocItem;
       setDocState((prev) => ({ ...prev, [activeSlug]: newDoc }));
       setFileState((prev) => ({ ...prev, [activeSlug]: null }));
-      setStatus({ type: "success", message: "Document uploaded." });
+      setStatus({ type: "success", message: copy.uploadSuccess });
     } catch (error) {
       setStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Upload failed.",
+        message:
+          error instanceof Error ? error.message : copy.uploadFailed,
       });
     } finally {
       setIsUploading(false);
@@ -144,16 +147,16 @@ export default function StaticDocsManager({
       <div className="border-b border-slate-200/70 bg-white">
         <div className="container mx-auto px-6 py-6">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-            Static docs
+            {copy.eyebrow}
           </p>
           <h1 className="mt-3 text-3xl font-semibold text-slate-900">
-            Documents
+            {copy.title}
           </h1>
           <p className="mt-2 text-slate-600">
-            Upload Terms and Privacy docs for your public site.
+            {copy.description}
           </p>
           <p className="mt-1 text-xs text-slate-400">
-            Active tenant: {tenantSlug} · Locale: {lang.toUpperCase()}
+            {copy.activeTenant}: {tenantSlug} \u00b7 {copy.localeLabel}: {lang.toUpperCase()}
           </p>
         </div>
       </div>
@@ -171,7 +174,7 @@ export default function StaticDocsManager({
                   : "rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-500 hover:border-blue-200 hover:text-blue-600"
               }
             >
-              {slug === "terms" ? "Terms" : "Privacy"}
+              {slug === "terms" ? copy.termsLabel : copy.privacyLabel}
             </button>
           ))}
         </div>
@@ -180,10 +183,10 @@ export default function StaticDocsManager({
           <CardContent className="space-y-6">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                {activeSlug === "terms" ? "Terms document" : "Privacy document"}
+                {activeSlug === "terms" ? copy.termsDocTitle : copy.privacyDocTitle}
               </h2>
               <p className="mt-1 text-sm text-slate-500">
-                Upload Markdown or PDF (default locale only).
+                {copy.uploadHint}
               </p>
             </div>
 
@@ -191,7 +194,7 @@ export default function StaticDocsManager({
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-slate-700">
-                    Document title
+                    {copy.documentTitle}
                   </label>
                   <input
                     value={titleState[activeSlug]}
@@ -207,7 +210,7 @@ export default function StaticDocsManager({
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-slate-700">
-                    Upload file
+                    {copy.uploadFile}
                   </label>
                   <input
                     type="file"
@@ -221,7 +224,7 @@ export default function StaticDocsManager({
                     className="block w-full text-sm text-slate-600 file:mr-4 file:rounded-full file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
                   />
                   <p className="text-xs text-slate-400">
-                    Current locale: {locale.toUpperCase()}
+                    {copy.currentLocale}: {locale.toUpperCase()}
                   </p>
                 </div>
 
@@ -230,13 +233,13 @@ export default function StaticDocsManager({
                   onClick={handleUpload}
                   disabled={!fileState[activeSlug] || isUploading}
                 >
-                  {isUploading ? "Uploading..." : "Upload document"}
+                  {isUploading ? copy.uploading : copy.uploadButton}
                 </Button>
               </div>
 
               <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50 p-4">
                 <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                  Current document
+                  {copy.currentDocument}
                 </div>
                 {activeDoc ? (
                   <>
@@ -250,7 +253,7 @@ export default function StaticDocsManager({
                       {activeDoc.mimeType} · {formatBytes(activeDoc.sizeBytes)}
                     </div>
                     <div className="text-xs text-slate-400">
-                      Updated {formatDate(activeDoc.updatedAt)}
+                      {copy.updatedLabel} {formatDate(activeDoc.updatedAt)}
                     </div>
                     <a
                       href={`${publicBaseUrl}/${locale}/docs/${activeSlug}`}
@@ -258,12 +261,12 @@ export default function StaticDocsManager({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Preview public page
+                      {copy.previewPublic}
                     </a>
                   </>
                 ) : (
                   <p className="text-sm text-slate-500">
-                    No document uploaded yet.
+                    {copy.emptyState}
                   </p>
                 )}
               </div>

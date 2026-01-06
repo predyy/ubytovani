@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatMessage, getMessages } from "@/lib/i18n/messages";
 
 type ReservationItem = {
   id: string;
@@ -37,12 +38,6 @@ type StatusState =
   | { type: "error"; message: string }
   | { type: "success"; message: string };
 
-const statusLabels = {
-  PENDING: "Pending",
-  CONFIRMED: "Confirmed",
-  CANCELLED: "Cancelled",
-} as const;
-
 const statusClassNames = {
   PENDING: "bg-amber-100 text-amber-700",
   CONFIRMED: "bg-emerald-100 text-emerald-700",
@@ -62,13 +57,15 @@ export default function BookingsManager({
   const [busyId, setBusyId] = useState<string | null>(null);
   const [autoConfirm, setAutoConfirm] = useState(autoConfirmBookings);
   const [isSavingSetting, setIsSavingSetting] = useState(false);
+  const copy = getMessages(lang).admin.bookings;
+  const statusLabels = copy.statusLabels;
 
   const emptyMessage = useMemo(() => {
     if (filters.status || filters.from || filters.to) {
-      return "No reservations match the current filters.";
+      return copy.emptyFiltered;
     }
-    return "No reservations yet.";
-  }, [filters]);
+    return copy.empty;
+  }, [filters, copy.empty, copy.emptyFiltered]);
 
   const handleConfirm = async (id: string) => {
     if (busyId) {
@@ -84,7 +81,7 @@ export default function BookingsManager({
       });
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to confirm reservation.");
+        throw new Error(payload.error || copy.confirmError);
       }
 
       setItems((prev) =>
@@ -94,12 +91,12 @@ export default function BookingsManager({
             : reservation,
         ),
       );
-      setStatus({ type: "success", message: "Reservation confirmed." });
+      setStatus({ type: "success", message: copy.confirmSuccess });
     } catch (error) {
       setStatus({
         type: "error",
         message:
-          error instanceof Error ? error.message : "Failed to confirm reservation.",
+          error instanceof Error ? error.message : copy.confirmError,
       });
     } finally {
       setBusyId(null);
@@ -120,7 +117,7 @@ export default function BookingsManager({
       });
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to cancel reservation.");
+        throw new Error(payload.error || copy.cancelError);
       }
 
       setItems((prev) =>
@@ -130,12 +127,12 @@ export default function BookingsManager({
             : reservation,
         ),
       );
-      setStatus({ type: "success", message: "Reservation cancelled." });
+      setStatus({ type: "success", message: copy.cancelSuccess });
     } catch (error) {
       setStatus({
         type: "error",
         message:
-          error instanceof Error ? error.message : "Failed to cancel reservation.",
+          error instanceof Error ? error.message : copy.cancelError,
       });
     } finally {
       setBusyId(null);
@@ -150,7 +147,7 @@ export default function BookingsManager({
     if (!canManageSettings) {
       setStatus({
         type: "error",
-        message: "You do not have permission to update booking settings.",
+        message: copy.settingsDenied,
       });
       return;
     }
@@ -166,16 +163,16 @@ export default function BookingsManager({
       });
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload.error || "Failed to update booking settings.");
+        throw new Error(payload.error || copy.settingsError);
       }
 
       setAutoConfirm(payload.autoConfirmBookings);
-      setStatus({ type: "success", message: "Booking settings updated." });
+      setStatus({ type: "success", message: copy.settingsSuccess });
     } catch (error) {
       setStatus({
         type: "error",
         message:
-          error instanceof Error ? error.message : "Failed to update booking settings.",
+          error instanceof Error ? error.message : copy.settingsError,
       });
     } finally {
       setIsSavingSetting(false);
@@ -187,16 +184,16 @@ export default function BookingsManager({
       <div className="border-b border-slate-200/70 bg-white">
         <div className="container mx-auto px-6 py-6">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-            Bookings
+            {copy.eyebrow}
           </p>
           <h1 className="mt-3 text-3xl font-semibold text-slate-900">
-            Booking requests
+            {copy.title}
           </h1>
           <p className="mt-2 text-slate-600">
-            Review booking requests and confirm or cancel reservations.
+            {copy.description}
           </p>
           <p className="mt-1 text-xs text-slate-400">
-            Active tenant: {tenantSlug} | Locale: {lang.toUpperCase()}
+            {copy.activeTenant}: {tenantSlug} | {copy.locale}: {lang.toUpperCase()}
           </p>
         </div>
       </div>
@@ -206,10 +203,10 @@ export default function BookingsManager({
           <CardContent className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                Booking policy
+                {copy.policyTitle}
               </h2>
               <p className="mt-1 text-sm text-slate-500">
-                Auto-confirm immediately blocks dates and skips manual approval.
+                {copy.policyHint}
               </p>
             </div>
             <label className="flex items-center gap-3 text-sm font-semibold text-slate-700">
@@ -220,7 +217,7 @@ export default function BookingsManager({
                 onChange={handleAutoConfirmToggle}
                 disabled={!canManageSettings || isSavingSetting}
               />
-              Auto-confirm booking requests
+              {copy.autoConfirmLabel}
             </label>
           </CardContent>
         </Card>
@@ -228,9 +225,11 @@ export default function BookingsManager({
         <Card>
           <CardContent className="space-y-4">
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">Filters</h2>
+              <h2 className="text-lg font-semibold text-slate-900">
+                {copy.filtersTitle}
+              </h2>
               <p className="mt-1 text-sm text-slate-500">
-                Narrow down by status or date range.
+                {copy.filtersHint}
               </p>
             </div>
             <form
@@ -240,7 +239,7 @@ export default function BookingsManager({
             >
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="status">
-                  Status
+                  {copy.statusLabel}
                 </label>
                 <select
                   id="status"
@@ -248,15 +247,15 @@ export default function BookingsManager({
                   defaultValue={filters.status}
                   className="rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700"
                 >
-                  <option value="">All</option>
-                  <option value="PENDING">Pending</option>
-                  <option value="CONFIRMED">Confirmed</option>
-                  <option value="CANCELLED">Cancelled</option>
+                  <option value="">{copy.statusAll}</option>
+                  <option value="PENDING">{statusLabels.PENDING}</option>
+                  <option value="CONFIRMED">{statusLabels.CONFIRMED}</option>
+                  <option value="CANCELLED">{statusLabels.CANCELLED}</option>
                 </select>
               </div>
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="from">
-                  From
+                  {copy.fromLabel}
                 </label>
                 <input
                   id="from"
@@ -268,7 +267,7 @@ export default function BookingsManager({
               </div>
               <div className="grid gap-2">
                 <label className="text-sm font-semibold text-slate-700" htmlFor="to">
-                  To
+                  {copy.toLabel}
                 </label>
                 <input
                   id="to"
@@ -279,7 +278,9 @@ export default function BookingsManager({
                 />
               </div>
               <div className="flex items-end">
-                <Button type="submit" className="w-full">Apply filters</Button>
+                <Button type="submit" className="w-full">
+                  {copy.applyFilters}
+                </Button>
               </div>
             </form>
             {status.type !== "idle" ? (
@@ -298,8 +299,12 @@ export default function BookingsManager({
 
         <section>
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-slate-900">Reservations</h2>
-            <span className="text-xs text-slate-400">{items.length} total</span>
+            <h2 className="text-xl font-semibold text-slate-900">
+              {copy.reservationsTitle}
+            </h2>
+            <span className="text-xs text-slate-400">
+              {formatMessage(copy.totalLabel, { count: items.length })}
+            </span>
           </div>
           {items.length === 0 ? (
             <div className="mt-4 rounded-2xl border border-dashed border-slate-200 p-8 text-center text-sm text-slate-500">
@@ -312,8 +317,12 @@ export default function BookingsManager({
                   reservation.roomName,
                   reservation.guestName,
                   reservation.guestEmail,
-                  reservation.guestPhone ? `Phone: ${reservation.guestPhone}` : null,
-                  reservation.guestCount ? `Guests: ${reservation.guestCount}` : null,
+                  reservation.guestPhone
+                    ? `${copy.phoneLabel}: ${reservation.guestPhone}`
+                    : null,
+                  reservation.guestCount
+                    ? `${copy.guestsLabel}: ${reservation.guestCount}`
+                    : null,
                 ].filter(Boolean);
 
                 return (
@@ -332,7 +341,9 @@ export default function BookingsManager({
                           </p>
                         ) : null}
                         <p className="mt-1 text-xs text-slate-400">
-                          Created {new Date(reservation.createdAt).toLocaleString()}
+                          {formatMessage(copy.createdLabel, {
+                            date: new Date(reservation.createdAt).toLocaleString(),
+                          })}
                         </p>
                       </div>
                     <div className="flex flex-wrap items-center gap-2">
@@ -347,7 +358,7 @@ export default function BookingsManager({
                           onClick={() => handleConfirm(reservation.id)}
                           disabled={busyId === reservation.id}
                         >
-                          {busyId === reservation.id ? "Working..." : "Confirm"}
+                          {busyId === reservation.id ? copy.working : copy.confirm}
                         </Button>
                       ) : null}
                       {reservation.status !== "CANCELLED" ? (
@@ -357,7 +368,7 @@ export default function BookingsManager({
                           onClick={() => handleCancel(reservation.id)}
                           disabled={busyId === reservation.id}
                         >
-                          {busyId === reservation.id ? "Working..." : "Cancel"}
+                          {busyId === reservation.id ? copy.working : copy.cancel}
                         </Button>
                       ) : null}
                     </div>
@@ -365,7 +376,7 @@ export default function BookingsManager({
                     {reservation.message ? (
                       <details className="mt-4 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">
                         <summary className="cursor-pointer text-sm font-semibold text-slate-700">
-                          Guest message
+                          {copy.guestMessage}
                         </summary>
                         <p className="mt-2 whitespace-pre-line">{reservation.message}</p>
                       </details>

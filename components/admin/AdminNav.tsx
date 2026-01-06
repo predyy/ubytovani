@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/lib/auth/actions";
+import { getMessages } from "@/lib/i18n/messages";
 
 type AdminNavItem = {
   label: string;
@@ -24,17 +25,19 @@ export default function AdminNav({
   publicUrl,
   items,
 }: AdminNavProps) {
+  const copy = getMessages(lang).admin.nav;
+
   return (
     <div className="flex h-full flex-col gap-6">
       <div>
         <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-          Administration
+          {copy.administration}
         </p>
         <h2 className="mt-3 text-xl font-semibold text-slate-900">
           {tenantName}
         </h2>
         <p className="mt-2 text-sm text-slate-500">
-          {propertyType || "Property type not set"}
+          {propertyType || copy.propertyTypeMissing}
         </p>
         <a
           href={publicUrl}
@@ -77,7 +80,7 @@ export default function AdminNav({
         <form action={logoutAction}>
           <input type="hidden" name="lang" value={lang} />
           <Button type="submit" variant="outline" size="default" className="w-full">
-            Log out
+            {copy.logout}
           </Button>
         </form>
       </div>

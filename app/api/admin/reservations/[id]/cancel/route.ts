@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 import { requireAdminTenant } from "@/lib/uploads/admin-context";
+import { sendBookingCancelledEmails } from "@/lib/email/booking";
 
 export async function POST(
   _request: Request,
@@ -32,6 +33,10 @@ export async function POST(
   const updated = await prisma.reservation.update({
     where: { id: reservation.id },
     data: { status: "CANCELLED" },
+  });
+
+  sendBookingCancelledEmails(updated.id).catch((sendError) => {
+    console.error("Failed to send cancellation emails", sendError);
   });
 
   return NextResponse.json({

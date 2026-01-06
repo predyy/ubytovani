@@ -13,6 +13,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { supportedLocales } from "@/lib/i18n/locales";
+import { getMessages } from "@/lib/i18n/messages";
 
 type LandingPageProps = {
   lang: string;
@@ -24,6 +26,9 @@ export default function LandingPage({ lang }: LandingPageProps) {
   const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
   const appUrl = `${protocol}://${adminSubdomain}.${rootDomain}/${lang}/login`;
   const demoUrl = `${protocol}://tenant1.${rootDomain}/${lang}`;
+  const messages = getMessages(lang);
+  const copy = messages.marketing.landing;
+  const { brand, languageLabel } = messages.common;
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_transparent_55%),radial-gradient(circle_at_bottom,_#e0f2fe,_transparent_50%)]">
@@ -33,31 +38,50 @@ export default function LandingPage({ lang }: LandingPageProps) {
             <div className="rounded-2xl bg-blue-600 p-2 text-white shadow-sm">
               <House className="h-6 w-6" />
             </div>
-            <span className="text-xl font-semibold tracking-tight">StayHost</span>
+            <span className="text-xl font-semibold tracking-tight">
+              {brand}
+            </span>
           </div>
           <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
             <a href="#features" className="text-slate-600 hover:text-slate-900">
-              Features
+              {copy.nav.features}
             </a>
-            <a href="#how-it-works" className="text-slate-600 hover:text-slate-900">
-              How it works
+            <a
+              href="#how-it-works"
+              className="text-slate-600 hover:text-slate-900"
+            >
+              {copy.nav.howItWorks}
             </a>
-            <a href="#templates" className="text-slate-600 hover:text-slate-900">
-              Templates
+            <a
+              href="#templates"
+              className="text-slate-600 hover:text-slate-900"
+            >
+              {copy.nav.templates}
             </a>
             <a href="#pricing" className="text-slate-600 hover:text-slate-900">
-              Pricing
+              {copy.nav.pricing}
             </a>
+
             <Button asChild variant="outline" size="default">
-              <a href={appUrl}>Login</a>
+              <a href={appUrl}>{copy.nav.login}</a>
             </Button>
             <Button asChild size="default">
-              <a href={appUrl}>Start free</a>
+              <a href={appUrl}>{copy.nav.startFree}</a>
             </Button>
+            <LanguageSwitcher
+              label={languageLabel}
+              currentLang={lang}
+              hrefForLocale={(locale) => `/${locale}`}
+            />
           </nav>
           <div className="flex items-center gap-3 md:hidden">
+            <LanguageSwitcher
+              label={languageLabel}
+              currentLang={lang}
+              hrefForLocale={(locale) => `/${locale}`}
+            />
             <Button asChild size="default">
-              <a href={appUrl}>Start free</a>
+              <a href={appUrl}>{copy.nav.startFree}</a>
             </Button>
           </div>
         </div>
@@ -67,40 +91,32 @@ export default function LandingPage({ lang }: LandingPageProps) {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-medium text-blue-700 shadow-sm">
             <Sparkles className="h-4 w-4" />
-            Launch your booking site this afternoon
+            {copy.hero.badge}
           </div>
           <h1 className="mt-6 text-4xl font-semibold leading-tight text-slate-900 md:text-6xl">
-            A multi-tenant booking platform built for accommodation hosts
+            {copy.hero.title}
           </h1>
           <p className="mt-6 text-lg text-slate-600 md:text-xl">
-            Create a single-page property site, manage availability, and accept
-            booking requests. Every host gets a subdomain, multi-language
-            routing, and a private admin workspace.
+            {copy.hero.description}
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Button asChild size="lg">
               <a href={appUrl}>
-                Build your site
+                {copy.hero.primaryCta}
                 <ChevronRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <a href={demoUrl}>View live demo</a>
+              <a href={demoUrl}>{copy.hero.secondaryCta}</a>
             </Button>
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-slate-600">
-            <div className="flex items-center gap-2">
-              <Check className="h-5 w-5 text-emerald-500" />
-              No credit card required
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-5 w-5 text-emerald-500" />
-              Free tenant subdomain
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-5 w-5 text-emerald-500" />
-              Single-page site by default
-            </div>
+            {copy.hero.checklist.map((item) => (
+              <div key={item} className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-emerald-500" />
+                {item}
+              </div>
+            ))}
           </div>
         </div>
         <div className="relative">
@@ -109,7 +125,7 @@ export default function LandingPage({ lang }: LandingPageProps) {
           <div className="overflow-hidden rounded-3xl border border-white/70 bg-white shadow-2xl">
             <img
               src="https://images.unsplash.com/photo-1733516587408-2530ab53ceda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHNhYXMlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzY2NzM5NTUyfDA&ixlib=rb-4.1.0&q=80&w=1200&utm_source=figma&utm_medium=referral"
-              alt="Admin dashboard preview"
+              alt={copy.hero.previewAlt}
               className="h-full w-full object-cover"
             />
           </div>
@@ -119,7 +135,9 @@ export default function LandingPage({ lang }: LandingPageProps) {
                 <Calendar className="h-6 w-6" />
               </div>
               <div>
-                <div className="text-sm text-slate-500">Bookings this week</div>
+                <div className="text-sm text-slate-500">
+                  {copy.hero.bookingsThisWeek}
+                </div>
                 <div className="text-2xl font-semibold text-slate-900">42</div>
               </div>
             </div>
@@ -131,43 +149,42 @@ export default function LandingPage({ lang }: LandingPageProps) {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl">
-              Everything you need to run your accommodation business
+              {copy.features.title}
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Build a guest-facing site, accept bookings, and keep your admin
-              work separated from your public tenant experience.
+              {copy.features.description}
             </p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <BenefitCard
               icon={<LayoutTemplate className="h-6 w-6" />}
-              title="WYSIWYG site builder"
-              description="Edit your single-page site with drag-and-drop sections. Publish instantly on your subdomain."
+              title={copy.features.items[0].title}
+              description={copy.features.items[0].description}
             />
             <BenefitCard
               icon={<Calendar className="h-6 w-6" />}
-              title="Availability calendar"
-              description="Block dates, sync reservations, and keep your inventory accurate across channels."
+              title={copy.features.items[1].title}
+              description={copy.features.items[1].description}
             />
             <BenefitCard
               icon={<Shield className="h-6 w-6" />}
-              title="Private admin space"
-              description="Hosts manage bookings, settings, and emails in a secure admin dashboard."
+              title={copy.features.items[2].title}
+              description={copy.features.items[2].description}
             />
             <BenefitCard
               icon={<Globe className="h-6 w-6" />}
-              title="Multi-language routing"
-              description="Every tenant uses /{lang} routes with locale enforcement and future paid upgrades."
+              title={copy.features.items[3].title}
+              description={copy.features.items[3].description}
             />
             <BenefitCard
               icon={<Sparkles className="h-6 w-6" />}
-              title="Custom templates"
-              description="Choose from curated layouts designed for modern accommodation brands."
+              title={copy.features.items[4].title}
+              description={copy.features.items[4].description}
             />
             <BenefitCard
               icon={<Mail className="h-6 w-6" />}
-              title="Configurable emails"
-              description="Customize all guest and host emails per locale with your branding."
+              title={copy.features.items[5].title}
+              description={copy.features.items[5].description}
             />
           </div>
         </div>
@@ -177,44 +194,46 @@ export default function LandingPage({ lang }: LandingPageProps) {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl">
-              Launch your site in four steps
+              {copy.steps.title}
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              From signup to bookings without touching a line of code.
+              {copy.steps.description}
             </p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-4">
-            <StepCard number="1" title="Register" description="Create your host account." />
-            <StepCard number="2" title="Pick a template" description="Choose a layout built for stays." />
-            <StepCard number="3" title="Customize" description="Add photos, amenities, and availability." />
-            <StepCard number="4" title="Publish" description="Go live on your subdomain." />
+            {copy.steps.items.map((item) => (
+              <StepCard
+                key={item.number}
+                number={item.number}
+                title={item.title}
+                description={item.description}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="templates" className="bg-gradient-to-b from-blue-50 to-white py-20">
+      <section
+        id="templates"
+        className="bg-gradient-to-b from-blue-50 to-white py-20"
+      >
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl">
-              Templates that feel like boutique brands
+              {copy.templates.title}
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Curated designs that keep the focus on your property and story.
+              {copy.templates.description}
             </p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            <TemplateCard
-              name="Modern Minimal"
-              image="https://images.unsplash.com/photo-1642132652859-3ef5a1048fd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWJzaXRlJTIwdGVtcGxhdGV8ZW58MXx8fHwxNzY2NzEzNzM4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            />
-            <TemplateCard
-              name="Luxury Resort"
-              image="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMHJvb218ZW58MXx8fHwxNzY2NzM5Mzc0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            />
-            <TemplateCard
-              name="Cozy Boutique"
-              image="https://images.unsplash.com/photo-1652481462565-3cfb977049a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NvbW1vZGF0aW9uJTIwcHJvcGVydHl8ZW58MXx8fHwxNzY2NzM5Mzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            />
+            {copy.templates.items.map((item) => (
+              <TemplateCard
+                key={item.name}
+                name={item.name}
+                image={item.image}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -223,76 +242,48 @@ export default function LandingPage({ lang }: LandingPageProps) {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl">
-              Trusted by accommodation owners
+              {copy.testimonials.title}
             </h2>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            <TestimonialCard
-              quote="We launched our site in a weekend and immediately started taking direct bookings."
-              author="Sarah Johnson"
-              role="B&B Owner, Vermont"
-            />
-            <TestimonialCard
-              quote="The availability calendar keeps us in sync with Airbnb without the headaches."
-              author="Michael Chen"
-              role="Vacation Rental Owner, California"
-            />
-            <TestimonialCard
-              quote="The templates look premium and the admin experience feels private and secure."
-              author="Emma Williams"
-              role="Boutique Hotel Manager, Oregon"
-            />
+            {copy.testimonials.items.map((item) => (
+              <TestimonialCard
+                key={item.author}
+                quote={item.quote}
+                author={item.author}
+                role={item.role}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="pricing" className="bg-gradient-to-b from-slate-50 to-white py-20">
+      <section
+        id="pricing"
+        className="bg-gradient-to-b from-slate-50 to-white py-20"
+      >
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl">
-              Simple pricing that grows with you
+              {copy.pricing.title}
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Start free, upgrade when you need multi-language and custom
-              domains.
+              {copy.pricing.description}
             </p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-          <PricingCard
-            name="Starter"
-            price="Free"
-            appUrl={appUrl}
-            features={[
-              "Tenant subdomain",
-              "Single-language site",
-              "Booking requests",
-              "Availability calendar",
-            ]}
-          />
-          <PricingCard
-            name="Professional"
-            price="$19/mo"
-            appUrl={appUrl}
-            featured
-            features={[
-              "Custom domain",
-              "Multi-language support",
-              "Premium templates",
-              "Airbnb sync",
-              "Priority support",
-            ]}
-          />
-          <PricingCard
-            name="Enterprise"
-            price="$49/mo"
-            appUrl={appUrl}
-            features={[
-              "Everything in Pro",
-              "White-label experience",
-              "API access",
-              "Dedicated onboarding",
-              ]}
-            />
+            {copy.pricing.tiers.map((tier) => (
+              <PricingCard
+                key={tier.name}
+                name={tier.name}
+                price={tier.price}
+                appUrl={appUrl}
+                featured={tier.featured}
+                features={tier.features}
+                featuredLabel={copy.pricing.featuredLabel}
+                ctaLabel={copy.pricing.cta}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -300,15 +291,13 @@ export default function LandingPage({ lang }: LandingPageProps) {
       <section className="bg-blue-600 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-semibold md:text-4xl">
-            Ready to publish your property site?
+            {copy.cta.title}
           </h2>
-          <p className="mt-4 text-lg text-blue-100">
-            Join hosts building their booking business on StayHost.
-          </p>
+          <p className="mt-4 text-lg text-blue-100">{copy.cta.description}</p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" variant="secondary">
               <a href={appUrl}>
-                Create your website
+                {copy.cta.button}
                 <ChevronRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
@@ -323,76 +312,81 @@ export default function LandingPage({ lang }: LandingPageProps) {
               <div className="rounded-xl bg-blue-600 p-2">
                 <House className="h-5 w-5" />
               </div>
-              <span className="text-lg font-semibold">StayHost</span>
+              <span className="text-lg font-semibold">{brand}</span>
             </div>
             <p className="mt-4 text-sm text-slate-400">
-              The multi-tenant platform for accommodation websites, bookings,
-              and guest communication.
+              {copy.footer.description}
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Product</h3>
+            <h3 className="text-sm font-semibold text-white">
+              {copy.footer.product}
+            </h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>
                 <a href="#features" className="hover:text-white">
-                  Features
+                  {copy.footer.features}
                 </a>
               </li>
               <li>
                 <a href="#templates" className="hover:text-white">
-                  Templates
+                  {copy.footer.templates}
                 </a>
               </li>
               <li>
                 <a href="#pricing" className="hover:text-white">
-                  Pricing
+                  {copy.footer.pricing}
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Company</h3>
+            <h3 className="text-sm font-semibold text-white">
+              {copy.footer.company}
+            </h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>
                 <Link href={`/${lang}/pricing`} className="hover:text-white">
-                  Roadmap
+                  {copy.footer.roadmap}
                 </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
-                  Careers
+                  {copy.footer.careers}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
-                  Press
+                  {copy.footer.press}
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Support</h3>
+            <h3 className="text-sm font-semibold text-white">
+              {copy.footer.support}
+            </h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>
                 <a href={appUrl} className="hover:text-white">
-                  Login
+                  {copy.footer.login}
                 </a>
               </li>
               <li>
                 <a href={appUrl} className="hover:text-white">
-                  Register
+                  {copy.footer.register}
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
-                  Help center
+                  {copy.footer.help}
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <div className="container mx-auto mt-10 border-t border-slate-800 px-4 pt-6 text-center text-xs text-slate-500">
-          &copy; 2024 StayHost. All rights reserved.
+          {copy.footer.copyright}
         </div>
       </footer>
     </div>
@@ -476,7 +470,9 @@ function TestimonialCard({
           ))}
         </div>
         <p className="mt-4 text-sm text-slate-700">"{quote}"</p>
-        <div className="mt-4 text-sm font-semibold text-slate-900">{author}</div>
+        <div className="mt-4 text-sm font-semibold text-slate-900">
+          {author}
+        </div>
         <div className="text-xs text-slate-500">{role}</div>
       </CardContent>
     </Card>
@@ -489,12 +485,16 @@ function PricingCard({
   features,
   featured,
   appUrl,
+  featuredLabel,
+  ctaLabel,
 }: {
   name: string;
   price: string;
   features: string[];
   featured?: boolean;
   appUrl: string;
+  featuredLabel: string;
+  ctaLabel: string;
 }) {
   return (
     <Card
@@ -507,7 +507,7 @@ function PricingCard({
       <CardContent>
         {featured ? (
           <span className="inline-flex rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
-            Most popular
+            {featuredLabel}
           </span>
         ) : null}
         <h3 className="mt-4 text-2xl font-semibold text-slate-900">{name}</h3>
@@ -528,10 +528,43 @@ function PricingCard({
           size="default"
           className="mt-8 w-full"
         >
-          <a href={appUrl}>Get started</a>
+          <a href={appUrl}>{ctaLabel}</a>
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+function LanguageSwitcher({
+  label,
+  currentLang,
+  hrefForLocale,
+}: {
+  label: string;
+  currentLang: string;
+  hrefForLocale: (locale: string) => string;
+}) {
+  return (
+    <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-white/70 px-1.5 py-1 text-xs font-semibold text-slate-600">
+      <span className="sr-only">{label}</span>
+      {supportedLocales.map((locale) => {
+        const isActive = locale === currentLang;
+        return (
+          <a
+            key={locale}
+            href={hrefForLocale(locale)}
+            className={
+              isActive
+                ? "rounded-full bg-blue-600 px-2 py-1 text-white"
+                : "rounded-full px-2 py-1 text-slate-600 hover:text-slate-900"
+            }
+            aria-current={isActive ? "page" : undefined}
+          >
+            {locale.toUpperCase()}
+          </a>
+        );
+      })}
+    </div>
   );
 }
 
@@ -552,7 +585,12 @@ function House({ className }: { className?: string }) {
 
 function Star({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   );
