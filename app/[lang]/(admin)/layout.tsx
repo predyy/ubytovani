@@ -58,8 +58,9 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
     { label: "Site Builder", href: `/${lang}/site-builder`, icon: LayoutIcon },
     { label: "Assets", href: `/${lang}/assets`, icon: ImageIcon },
     { label: "Docs", href: `/${lang}/docs`, icon: DocIcon },
-    { label: "Availability", href: "#", icon: CalendarIcon },
-    { label: "Bookings", href: "#", icon: TicketsIcon },
+    { label: "Rooms", href: `/${lang}/rooms`, icon: RoomsIcon },
+    { label: "Availability", href: `/${lang}/availability`, icon: CalendarIcon },
+    { label: "Bookings", href: `/${lang}/bookings`, icon: TicketsIcon },
     { label: "Emails", href: "#", icon: MailIcon },
   ];
 
@@ -205,6 +206,21 @@ function MailIcon({ className }: { className?: string }) {
     >
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="M3 7l9 6 9-6" />
+    </svg>
+  );
+}
+
+function RoomsIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <path d="M9 21V12h6v9" />
     </svg>
   );
 }

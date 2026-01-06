@@ -1,11 +1,14 @@
 import type { Config } from "@measured/puck";
 
+import AvailabilityCalendarBlock from "@/components/puck/blocks/AvailabilityCalendar";
 import BookingCTABlock from "@/components/puck/blocks/BookingCTA";
+import BookingFormBlock from "@/components/puck/blocks/BookingForm";
 import FeaturesBlock from "@/components/puck/blocks/Features";
 import FooterBlock from "@/components/puck/blocks/Footer";
 import GalleryBlock from "@/components/puck/blocks/Gallery";
 import HeroBlock from "@/components/puck/blocks/Hero";
 import RichTextBlock from "@/components/puck/blocks/RichText";
+import RoomsSectionBlock from "@/components/puck/blocks/RoomsSection";
 
 export const puckConfig: Config = {
   components: {
@@ -113,6 +116,21 @@ export const puckConfig: Config = {
         buttonLabel: "Start booking",
       },
       render: BookingCTABlock,
+    },
+    AvailabilityCalendar: {
+      fields: {},
+      defaultProps: {},
+      render: AvailabilityCalendarBlock,
+    },
+    BookingForm: {
+      fields: {},
+      defaultProps: {},
+      render: BookingFormBlock,
+    },
+    RoomsSection: {
+      fields: {},
+      defaultProps: {},
+      render: RoomsSectionBlock,
     },
     Footer: {
       fields: {

@@ -139,12 +139,23 @@ export async function createPropertyAction(
   const placeholderConfig = ensurePuckIds(starterPuckData);
 
   await prisma.$transaction(async (tx) => {
-    await tx.property.create({
+    const property = await tx.property.create({
       data: {
         tenantId,
         propertyType,
         roomCount,
         maxGuests: maxGuestsValue,
+      },
+    });
+
+    await tx.room.create({
+      data: {
+        tenantId,
+        propertyId: property.id,
+        name: "Default Room",
+        description: "Default room for this property.",
+        amenities: [],
+        isActive: true,
       },
     });
 

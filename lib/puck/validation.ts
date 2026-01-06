@@ -88,6 +88,39 @@ const bookingSchema = z
   })
   .strip();
 
+const availabilityCalendarSchema = z
+  .object({
+    type: z.literal("AvailabilityCalendar"),
+    props: z
+      .object({
+        id: idSchema,
+      })
+      .strip(),
+  })
+  .strip();
+
+const bookingFormSchema = z
+  .object({
+    type: z.literal("BookingForm"),
+    props: z
+      .object({
+        id: idSchema,
+      })
+      .strip(),
+  })
+  .strip();
+
+const roomsSectionSchema = z
+  .object({
+    type: z.literal("RoomsSection"),
+    props: z
+      .object({
+        id: idSchema,
+      })
+      .strip(),
+  })
+  .strip();
+
 const footerSchema = z
   .object({
     type: z.literal("Footer"),
@@ -117,6 +150,9 @@ const puckDataSchema = z
         featuresSchema,
         gallerySchema,
         bookingSchema,
+        availabilityCalendarSchema,
+        bookingFormSchema,
+        roomsSectionSchema,
         footerSchema,
       ]),
     ),

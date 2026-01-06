@@ -14,11 +14,16 @@ model Tenant {
   plan           TenantPlan @default(FREE)
   defaultLocale  String
   enabledLocales String[]
+  autoConfirmBookings Boolean @default(false)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   members        TenantMember[]
   properties     Property[]
+  rooms          Room[]
+  roomImages     RoomImage[]
+  reservations   Reservation[]
+  availabilityBlocks AvailabilityBlock[]
   siteConfigs    SitePageConfig[]
   emailTemplates EmailTemplate[]
   assets         Asset[]
@@ -75,8 +80,93 @@ model Property {
   updatedAt    DateTime @updatedAt
 
   tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  rooms  Room[]
+  reservations Reservation[]
+  availabilityBlocks AvailabilityBlock[]
 
   @@index([tenantId])
+}
+
+model Room {
+  id          String   @id @default(cuid())
+  tenantId    String
+  propertyId  String
+  name        String
+  slug        String?
+  description String
+  amenities   String[]
+  maxGuests   Int?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  images   RoomImage[]
+  reservations Reservation[]
+  availabilityBlocks AvailabilityBlock[]
+
+  @@unique([tenantId, slug])
+  @@index([tenantId, propertyId])
+}
+
+model RoomImage {
+  id        String   @id @default(cuid())
+  tenantId  String
+  roomId    String
+  assetId   String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  asset  Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, assetId])
+  @@index([tenantId, roomId])
+}
+
+model Reservation {
+  id           String   @id @default(cuid())
+  tenantId     String
+  propertyId   String
+  roomId       String?
+  guestName    String
+  guestEmail   String
+  guestPhone   String?
+  guestCount   Int?
+  message      String?
+  checkInDate  DateTime @db.Date
+  checkOutDate DateTime @db.Date
+  status       ReservationStatus @default(PENDING)
+  source       ReservationSource @default(DIRECT)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  room     Room?    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, propertyId, roomId, checkInDate, checkOutDate])
+  @@index([status])
+}
+
+model AvailabilityBlock {
+  id         String   @id @default(cuid())
+  tenantId   String
+  propertyId String
+  roomId     String?
+  startDate  DateTime @db.Date
+  endDate    DateTime @db.Date
+  reason     String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  room     Room?    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, propertyId, roomId, startDate, endDate])
 }
 
 model SitePageConfig {
@@ -128,6 +218,7 @@ model Asset {
 
   tenant    Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   createdBy User   @relation(fields: [createdByUserId], references: [id], onDelete: Cascade)
+  roomImages RoomImage[]
 
   @@index([tenantId])
   @@index([createdByUserId])
@@ -177,4 +268,14 @@ enum EmailTemplateType {
   BOOKING_CONFIRMED_HOST
   BOOKING_CANCELLED_GUEST
   BOOKING_CANCELLED_HOST
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum ReservationSource {
+  DIRECT
 }

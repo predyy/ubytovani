@@ -9,6 +9,7 @@
     "lint": "eslint",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
+    "db:backfill-rooms": "node prisma/backfill-rooms.js",
     "prisma:generate": "prisma generate"
   },
   "dependencies": {

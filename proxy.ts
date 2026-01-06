@@ -71,7 +71,6 @@ export async function proxy(req: NextRequest) {
     response.headers.set("x-tenant-mode", "tenant");
     response.headers.set("x-tenant-host", rawHost);
 
-    console.log(response);
     return response;
   }
 

@@ -31,6 +31,12 @@ export type BookingCTAProps = {
   buttonLabel: string;
 };
 
+export type AvailabilityCalendarProps = Record<string, never>;
+
+export type BookingFormProps = Record<string, never>;
+
+export type RoomsSectionProps = Record<string, never>;
+
 export type FooterLink = {
   label: string;
   href: string;
@@ -51,6 +57,9 @@ export type PuckBlock =
   | { type: "Features"; props: WithId<FeaturesProps> }
   | { type: "Gallery"; props: WithId<GalleryProps> }
   | { type: "BookingCTA"; props: WithId<BookingCTAProps> }
+  | { type: "AvailabilityCalendar"; props: WithId<AvailabilityCalendarProps> }
+  | { type: "BookingForm"; props: WithId<BookingFormProps> }
+  | { type: "RoomsSection"; props: WithId<RoomsSectionProps> }
   | { type: "Footer"; props: WithId<FooterProps> };
 
 export type PuckDataShape = {
@@ -66,5 +75,8 @@ export const allowedBlockTypes = [
   "Features",
   "Gallery",
   "BookingCTA",
+  "AvailabilityCalendar",
+  "BookingForm",
+  "RoomsSection",
   "Footer",
 ] as const;

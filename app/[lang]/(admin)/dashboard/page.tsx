@@ -173,13 +173,18 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
               icon: <DocIcon />,
             },
             {
+              label: "Rooms",
+              href: `/${lang}/rooms`,
+              icon: <HomeIcon />,
+            },
+            {
               label: "Availability",
-              href: "#",
+              href: `/${lang}/availability`,
               icon: <CalendarIcon />,
             },
             {
               label: "Bookings",
-              href: "#",
+              href: `/${lang}/bookings`,
               icon: <TicketsIcon />,
             },
             {

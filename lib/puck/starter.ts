@@ -68,6 +68,18 @@ export const starterPuckData: PuckDataShape = {
       },
     },
     {
+      type: "RoomsSection",
+      props: {},
+    },
+    {
+      type: "AvailabilityCalendar",
+      props: {},
+    },
+    {
+      type: "BookingForm",
+      props: {},
+    },
+    {
       type: "Footer",
       props: {
         copyright: "(c) 2024 StayHost. All rights reserved.",
